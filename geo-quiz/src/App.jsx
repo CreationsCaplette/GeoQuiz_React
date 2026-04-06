@@ -1,17 +1,13 @@
-import titleLogo from './assets/globe.svg'
-import creationsLogo from './assets/creations.svg'
-import './App.css'
+import Splash from "./components/Splash.jsx";
+import { GameProgressContextProvider } from './store/GameProgress.jsx';
+
 
 function App() {
   return (
-    <>
-      <section id="center">
-        <h1>Geo Quiz</h1>
-        <img src={titleLogo} className="base" width="291" height="315" alt="Globe Logo" />
-        <img src={creationsLogo} className="base" width="134" height="75" alt="Globe Logo" />
-      </section>
-    </>
-  )
+    <GameProgressContextProvider>
+      <Splash />
+    </GameProgressContextProvider>
+  );
 }
 
-export default App
+export default App;
