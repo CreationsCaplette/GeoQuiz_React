@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
 
 const GameProgressContext = createContext({
-    progress: '',
+    progress: 'splash',
     goToMenu: () => { },
 });
 

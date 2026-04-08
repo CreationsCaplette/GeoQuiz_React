@@ -1,14 +1,26 @@
-import Splash from "./components/Splash.jsx";
-import { GameProgressContextProvider } from './store/GameProgress.jsx';
+import { useContext } from 'react';
 
-function App() {
-  function handleTimeout() {
-    console.log("Timeout");
+import Splash from "./components/Splash.jsx";
+import Menu from './components/Menu.jsx';
+
+import { GameProgressContextProvider } from './store/GameProgressContext.jsx';
+import GameProgressContext from './store/GameProgressContext';
+
+function GameContent() {
+  const gameProgressContext = useContext(GameProgressContext)
+
+  let gameState = <Splash />;
+  if (gameProgressContext.progress === 'menu') {
+    gameState = <Menu />;
   }
 
+  return gameState;
+}
+
+function App() {
   return (
     <GameProgressContextProvider>
-      <Splash onTimeout={handleTimeout} />
+      <GameContent />
     </GameProgressContextProvider>
   );
 }
