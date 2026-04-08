@@ -1,7 +1,18 @@
+import { useEffect } from 'react';
+
 import titleLogo from '../assets/globe.svg';
 import creationsLogo from '../assets/creations.svg';
 
-export default function Splash() {
+const TIMEOUT = 2500;
+
+export default function Splash({ onTimeout }) {
+    useEffect(() => {
+        const timer = setTimeout(onTimeout, TIMEOUT);
+
+        return () => { clearTimeout(timer) };
+    }, [onTimeout]);
+
+
     return (
         <>
             <h1>Geo Quiz</h1>
