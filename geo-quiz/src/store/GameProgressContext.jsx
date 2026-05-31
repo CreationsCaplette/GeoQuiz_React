@@ -3,6 +3,7 @@ import { createContext, useState } from "react";
 const GameProgressContext = createContext({
     progress: 'splash',
     goToMenu: () => { },
+    goToCapitalsGame: () => { },
 });
 
 export function GameProgressContextProvider({ children }) {
@@ -12,9 +13,14 @@ export function GameProgressContextProvider({ children }) {
         setGameProgress('menu');
     }
 
+    function goToCapitalsGame() {
+        setGameProgress('capitalsGame');
+    }
+
     const gameProgressContext = {
         progress: gameProgress,
         goToMenu,
+        goToCapitalsGame,
     }
 
     return (

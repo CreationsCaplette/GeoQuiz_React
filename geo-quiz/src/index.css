@@ -46,3 +46,7 @@ h2 {
 .menu-button:hover {
   border: 3px solid #00B8F0;
 }
+
+.game-flag {
+  height: 60px;
+}
