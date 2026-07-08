@@ -21,12 +21,14 @@ h1 {
   font-family: 'Kadwa';
   font-size: 3rem;
   font-weight: 400;
+  text-align: center;
 }
 
-h2 {
+h3 {
   font-family: 'Kadwa';
-  font-size: 1.5rem;
+  font-size: 1.5625rem;
   font-weight: 400;
+  text-align: center;
 }
 
 .menu-button {
@@ -45,6 +47,33 @@ h2 {
 
 .menu-button:hover {
   border: 3px solid #00B8F0;
+}
+
+.game-question {
+  color: #F5F5F5;
+  font-family: 'Kadwa';
+  font-size: 1.625rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.game-button {
+  background-color: #F5F5F5;
+  border: 1px solid #00B8F0;
+  border-radius: 40px;
+  color: #006B76;
+  padding: 10px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  height: 45px;
+  width: 260px;
+  margin-bottom: 20px;
+}
+
+.game-button:hover {
+  background-color: #00B8F0;
+  color: #F5F5F5;
 }
 
 .game-flag {

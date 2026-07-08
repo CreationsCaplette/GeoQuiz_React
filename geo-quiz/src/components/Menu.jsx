@@ -15,7 +15,7 @@ export default function Menu() {
 
     return (
         <>
-            <h2>Geo Quiz</h2>
+            <h3>Geo Quiz</h3>
             <img src={menuLogo} className="base" width="60" height="60" alt="Globe Logo" />
             <MenuButton onClick={handleCapitalsGame}>Capitals Game</MenuButton>
             <MenuButton>Reverse Capitals Game</MenuButton>
