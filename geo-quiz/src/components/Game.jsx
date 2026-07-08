@@ -4,29 +4,33 @@ const requestConfig = {};
 
 export default function Game() {
     const {
-        data: countryInfo,
+        data: questionData,
         isLoading,
         error
-    } = useHttp('https://restcountries.com/v3.1/all?fields=name,capital,flags', requestConfig, []);
-
-    if (isLoading) {
-        return <p className="center">Fetching countries data...</p>
-    }
+    } = useHttp('https://localhost:7266/game/capitals', requestConfig, []);
 
     if (error) {
         return <Error title="Failed to fetch countries data" message={error} />;
     }
 
+    if (isLoading) {
+        return <p className="center">Fetching countries data...</p>
+    }
+
     return (
         <>
             <ul id="data">
-                {countryInfo.map((country) => (
-                    <div key={country.name.common}>
-                        <p>{country.name.common} - {country.capital[0]}</p>
-                        <img className='game-flag' src={country.flags.svg} alt={country.flags.alt} />
+                {questionData.map((question) => (
+                    <div key={question.question}>
+                        <p>{question.question}</p>
+                        {question.choices.map((choice) => (
+                            <div key={question.question + '-' + choice} >
+                                <p>{choice}</p>
+                            </div>
+                        ))}
                     </div>
                 ))}
-            </ul>
+            </ul >
         </>
     );
 }
