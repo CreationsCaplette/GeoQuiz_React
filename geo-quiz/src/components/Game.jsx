@@ -1,7 +1,7 @@
 import useHttp from "../hooks/useHttp";
 
-import GameQuestion from "./GameQuestion.jsx";
-import GameButton from './GameButton.jsx';
+import Question from './Question.jsx'
+import Button from './Button.jsx';
 
 const requestConfig = {};
 
@@ -22,14 +22,9 @@ export default function Game() {
 
     return (
         <>
-            <ul id="data">
+            <ul id="question">
                 {questionData.map((question) => (
-                    <div key={question.question}>
-                        <GameQuestion>{question.question}</GameQuestion>
-                        {question.choices.map((choice) => (
-                            <GameButton key={question.question + '-' + choice}>{choice}</GameButton>
-                        ))}
-                    </div>
+                    <Question key={question.question} question={question.question} choices={question.choices} />
                 ))}
             </ul >
         </>

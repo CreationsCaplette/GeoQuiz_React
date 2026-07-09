@@ -24,14 +24,39 @@ h1 {
   text-align: center;
 }
 
+h2 {
+  color: #F5F5F5;
+  font-family: 'Kadwa';
+  font-size: 1.625rem;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+  width: 260px;
+}
+
 h3 {
   font-family: 'Kadwa';
   font-size: 1.5625rem;
   font-weight: 400;
+  margin: 0;
   text-align: center;
 }
 
-.menu-button {
+#menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+#question {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.button {
   background-color: #006B76;
   border: 1px solid #00B8F0;
   border-radius: 40px;
@@ -40,40 +65,34 @@ h3 {
   text-align: center;
   display: inline-block;
   font-size: 16px;
-  height: 45px;
+  height: 52px;
   width: 260px;
-  margin-top: 40px;
 }
 
-.menu-button:hover {
+.button:hover {
   border: 3px solid #00B8F0;
 }
 
-.game-question {
-  color: #F5F5F5;
-  font-family: 'Kadwa';
-  font-size: 1.625rem;
-  font-weight: 400;
-  text-align: center;
-}
-
-.game-button {
+.button.game {
   background-color: #F5F5F5;
-  border: 1px solid #00B8F0;
-  border-radius: 40px;
   color: #006B76;
-  padding: 10px;
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-  height: 45px;
-  width: 260px;
-  margin-bottom: 20px;
 }
 
-.game-button:hover {
+.button.game:hover {
   background-color: #00B8F0;
   color: #F5F5F5;
+}
+
+.button.game.disabled {
+  background-color: #BAB5B5;
+}
+
+.button.game.valid {
+  background-color: #00BD71;
+}
+
+.button.game.invalid {
+  background-color: #AC191A;
 }
 
 .game-flag {
