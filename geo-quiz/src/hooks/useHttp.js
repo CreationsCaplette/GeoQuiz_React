@@ -1,14 +1,13 @@
-//https://restcountries.com/v3.1/all?fields=name,capital,flags
-
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 async function sendHttpRequest(url, config) {
     const response = await fetch(url, config);
+    const resData = await response.json();
+
     if (!response.ok) {
-        throw new Error(resData.message || 'Something went wrong, failed to send request.');
+        throw new Error(resData.message || "Something went wrong, failed to send request.");
     }
 
-    const resData = await response.json();
     return resData;
 }
 
@@ -16,6 +15,7 @@ export default function useHttp(url, config, initialData) {
     const [data, setData] = useState(initialData);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState();
+    const initialRequestRef = useRef(null);
 
     function clearData() {
         setData(initialData);
@@ -29,17 +29,28 @@ export default function useHttp(url, config, initialData) {
                 const resData = await sendHttpRequest(url, { ...config, body: data });
                 setData(resData);
             } catch (error) {
-                setError(error.message || 'Something went wrong!');
+                setError(error.message || "Something went wrong!");
             }
 
             setIsLoading(false);
-        }, [url, config]);
+        },
+        [url, config]
+    );
 
     useEffect(() => {
-        if (config && (config.method === 'GET' || !config.method) || !config) {
-            sendRequest();
+        const shouldFetch = !config || config.method === "GET" || !config.method;
+        const requestKey = `${url}-${config?.method || "GET"}`;
+
+        if (!shouldFetch || initialRequestRef.current === requestKey) {
+            return;
         }
-    }, [sendRequest, config]);
+
+        initialRequestRef.current = requestKey;
+
+        queueMicrotask(() => {
+            sendRequest();
+        });
+    }, [sendRequest, url, config]);
 
     return {
         data,
@@ -47,5 +58,5 @@ export default function useHttp(url, config, initialData) {
         error,
         sendRequest,
         clearData,
-    }
+    };
 }

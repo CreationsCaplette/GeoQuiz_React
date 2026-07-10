@@ -2,15 +2,15 @@ import { useEffect, useContext } from 'react';
 
 import titleLogo from '../assets/globe.svg';
 import creationsLogo from '../assets/creations.svg';
-import GameProgressContext from '../store/GameProgressContext';
+import SceneContext from '../store/SceneContext';
 
 const TIMEOUT = 3000;
 
 export default function Splash() {
-    const gameProgressContext = useContext(GameProgressContext)
+    const sceneContext = useContext(SceneContext)
 
     useEffect(() => {
-        const timer = setTimeout(gameProgressContext.goToMenu, TIMEOUT);
+        const timer = setTimeout(sceneContext.goToMenu, TIMEOUT);
 
         return () => { clearTimeout(timer) };
     });
