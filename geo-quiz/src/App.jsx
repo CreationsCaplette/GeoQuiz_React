@@ -4,27 +4,27 @@ import Splash from "./components/Splash.jsx";
 import Menu from './components/Menu.jsx';
 import Game from './components/Game.jsx';
 
-import { GameProgressContextProvider } from './store/GameProgressContext.jsx';
-import GameProgressContext from './store/GameProgressContext';
+import { SceneContextProvider } from './store/SceneContext.jsx';
+import SceneContext from './store/SceneContext';
 
-function GameContent() {
-  const gameProgressContext = useContext(GameProgressContext)
+function SceneContent() {
+  const sceneContext = useContext(SceneContext)
 
-  let gameState = <Splash />;
-  if (gameProgressContext.progress === 'menu') {
-    gameState = <Menu />;
-  } else if (gameProgressContext.progress === 'capitalsGame') {
-    gameState = <Game />
+  let sceneState = <Splash />;
+  if (sceneContext.scene === 'menu') {
+    sceneState = <Menu />;
+  } else if (sceneContext.scene === 'capitalsGame') {
+    sceneState = <Game />
   }
 
-  return gameState;
+  return sceneState;
 }
 
 function App() {
   return (
-    <GameProgressContextProvider>
-      <GameContent />
-    </GameProgressContextProvider>
+    <SceneContextProvider>
+      <SceneContent />
+    </SceneContextProvider>
   );
 }
 

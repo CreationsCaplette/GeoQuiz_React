@@ -2,15 +2,15 @@ import { useContext } from 'react';
 
 import menuLogo from '../assets/globe_small.svg';
 
-import GameProgressContext from '../store/GameProgressContext';
+import SceneContext from '../store/SceneContext.jsx';
 
 import Button from './Button.jsx';
 
 export default function Menu() {
-    const gameProgressContext = useContext(GameProgressContext)
+    const sceneContext = useContext(SceneContext)
 
     function handleCapitalsGame() {
-        gameProgressContext.goToCapitalsGame();
+        sceneContext.goToCapitalsGame();
     }
 
     return (
