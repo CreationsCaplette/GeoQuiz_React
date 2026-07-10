@@ -7,7 +7,7 @@ import SceneContext from '../store/SceneContext.jsx';
 import Button from './Button.jsx';
 
 export default function Menu() {
-    const sceneContext = useContext(SceneContext)
+    const sceneContext = useContext(SceneContext);
 
     function handleCapitalsGame() {
         sceneContext.goToCapitalsGame();

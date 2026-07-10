@@ -1,11 +1,17 @@
+import { useContext } from 'react';
+
 import useHttp from "../hooks/useHttp";
 
 import Question from './Question.jsx'
 import Button from './Button.jsx';
 
+import GameContext from '../store/GameContext';
+
 const requestConfig = {};
 
 export default function Game() {
+    const gameContext = useContext(GameContext);
+
     const {
         data: questionData,
         isLoading,
@@ -20,12 +26,19 @@ export default function Game() {
         return <p className="center">Fetching countries data...</p>
     }
 
+    function handleGoToNextQuestion() {
+        gameContext.goToNextQuestion();
+    }
+
+    const currentQuestion = questionData?.[gameContext.questionIndex];
+    if (!currentQuestion) return null;
+
     return (
         <>
             <ul id="question">
-                {questionData.map((question) => (
-                    <Question key={question.question} question={question.question} choices={question.choices} />
-                ))}
+                <Question
+                    questionData={currentQuestion}
+                    onNext={handleGoToNextQuestion} />
             </ul >
         </>
     );

@@ -7,6 +7,8 @@ import Game from './components/Game.jsx';
 import { SceneContextProvider } from './store/SceneContext.jsx';
 import SceneContext from './store/SceneContext';
 
+import { GameContextProvider } from './store/GameContext';
+
 function SceneContent() {
   const sceneContext = useContext(SceneContext)
 
@@ -14,7 +16,7 @@ function SceneContent() {
   if (sceneContext.scene === 'menu') {
     sceneState = <Menu />;
   } else if (sceneContext.scene === 'capitalsGame') {
-    sceneState = <Game />
+    sceneState = <GameContextProvider><Game /></GameContextProvider>
   }
 
   return sceneState;
