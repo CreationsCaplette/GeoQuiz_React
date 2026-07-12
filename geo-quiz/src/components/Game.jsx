@@ -1,16 +1,14 @@
-import { useContext } from 'react';
-
+import { useContext, useState } from 'react';
 import useHttp from "../hooks/useHttp";
-
-import Question from './Question.jsx'
-import Button from './Button.jsx';
-
+import Timer from './Timer.jsx';
+import Question from './Question.jsx';
 import GameContext from '../store/GameContext';
 
 const requestConfig = {};
 
 export default function Game() {
     const gameContext = useContext(GameContext);
+    const [timeUp, setTimeUp] = useState(false);
 
     const {
         data: questionData,
@@ -30,16 +28,30 @@ export default function Game() {
         gameContext.goToNextQuestion();
     }
 
+    function handleTimeUp() {
+        setTimeUp(true);
+    }
+
     const currentQuestion = questionData?.[gameContext.questionIndex];
     if (!currentQuestion) return null;
 
+    if (timeUp) {
+        return <p className="center">Time is up!</p>
+    }
+
     return (
         <>
-            <ul id="question">
-                <Question
-                    questionData={currentQuestion}
-                    onNext={handleGoToNextQuestion} />
-            </ul >
+            <div id="score">42</div>
+            <div id="progress">1/10</div>
+            <Timer
+                key={gameContext.questionIndex}
+                initialTime={30}
+                onTimeUp={handleTimeUp}
+            />
+            <Question id="question"
+                questionData={currentQuestion}
+                onNext={handleGoToNextQuestion}
+            />
         </>
     );
 }

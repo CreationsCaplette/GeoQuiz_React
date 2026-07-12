@@ -2,7 +2,7 @@ import Button from './Button.jsx';
 
 export default function Question({ questionData, onNext: onClick }) {
     return (
-        <>
+        <ul id="question">
             <h2>{questionData.question}</h2>
             {questionData.choices.map((choice) => (
                 <Button
@@ -12,6 +12,6 @@ export default function Question({ questionData, onNext: onClick }) {
                     {choice}
                 </Button>
             ))}
-        </>
+        </ul >
     );
 }

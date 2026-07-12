@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Kadwa:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kadwa:wght@400;700&display=swap");
 
 #root {
   min-height: 100svh;
@@ -10,23 +10,23 @@
 
 body {
   margin: 0;
-  font-family: 'Kadwa';
+  font-family: "Kadwa";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #004047;
-  color: #00B8F0;
+  color: #00b8f0;
 }
 
 h1 {
-  font-family: 'Kadwa';
+  font-family: "Kadwa";
   font-size: 3rem;
   font-weight: 400;
   text-align: center;
 }
 
 h2 {
-  color: #F5F5F5;
-  font-family: 'Kadwa';
+  color: #f5f5f5;
+  font-family: "Kadwa";
   font-size: 1.625rem;
   font-weight: 400;
   margin: 0;
@@ -35,7 +35,7 @@ h2 {
 }
 
 h3 {
-  font-family: 'Kadwa';
+  font-family: "Kadwa";
   font-size: 1.5625rem;
   font-weight: 400;
   margin: 0;
@@ -49,18 +49,36 @@ h3 {
   gap: 40px;
 }
 
+#score {
+  color: #f5f5f5;
+}
+
+#progress {
+  color: #f5f5f5;
+}
+
+#timer {
+  color: #00b8f0;
+  font-family: "Kadwa";
+  font-size: 1.25rem;
+  font-weight: 400;
+  text-align: center;
+}
+
 #question {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  padding-inline-start: 0;
+  margin: 0;
 }
 
 .button {
-  background-color: #006B76;
-  border: 1px solid #00B8F0;
+  background-color: #006b76;
+  border: 1px solid #00b8f0;
   border-radius: 40px;
-  color: #F5F5F5;
+  color: #f5f5f5;
   padding: 10px;
   text-align: center;
   display: inline-block;
@@ -70,29 +88,29 @@ h3 {
 }
 
 .button:hover {
-  border: 3px solid #00B8F0;
+  border: 3px solid #00b8f0;
 }
 
 .button.game {
-  background-color: #F5F5F5;
-  color: #006B76;
+  background-color: #f5f5f5;
+  color: #006b76;
 }
 
 .button.game:hover {
-  background-color: #00B8F0;
-  color: #F5F5F5;
+  background-color: #00b8f0;
+  color: #f5f5f5;
 }
 
 .button.game.disabled {
-  background-color: #BAB5B5;
+  background-color: #bab5b5;
 }
 
 .button.game.valid {
-  background-color: #00BD71;
+  background-color: #00bd71;
 }
 
 .button.game.invalid {
-  background-color: #AC191A;
+  background-color: #ac191a;
 }
 
 .game-flag {
