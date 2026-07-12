@@ -47,14 +47,16 @@ export default function Game() {
 
     return (
         <>
-            <Score />
+            <Score
+                score={gameContext.score}
+            />
             <Progress
                 progressIndex={gameContext.questionIndex + 1}
                 questionCount={questionData.length}
             />
             <Timer
                 key={gameContext.questionIndex}
-                initialTime={10}
+                initialTime={10000}
                 onTimeUp={handleTimeUp}
             />
             <Question id="question"

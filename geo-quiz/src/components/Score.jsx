@@ -1,3 +1,3 @@
-export default function Score() {
-    return <div id="score">42</div>;
+export default function Score({ score = 0 }) {
+    return <div id="score">{score}</div>;
 }

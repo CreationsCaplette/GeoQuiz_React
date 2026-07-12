@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 
 const GameContext = createContext({
     questionIndex: 0,
+    score: 0,
     isGameOver: false,
     goToNextQuestion: () => { },
 });
@@ -9,25 +10,22 @@ const GameContext = createContext({
 export function GameContextProvider({ children }) {
     const [gameState, setGameState] = useState({
         questionIndex: 0,
+        score: 0,
+        isGameOver: false,
     });
 
     function goToNextQuestion(questionCount) {
-        if (gameState.questionIndex + 1 >= questionCount) {
-            setGameState((prevState) => ({
-                ...prevState,
-                isGameOver: true
-            }));
-            return;
-        }
-
         setGameState((prevState) => ({
             ...prevState,
-            questionIndex: prevState.questionIndex + 1
+            questionIndex: prevState.questionIndex + 1,
+            score: prevState.score + 10,
+            isGameOver: prevState.questionIndex + 1 >= questionCount,
         }));
     }
 
     const gameContext = {
         questionIndex: gameState.questionIndex,
+        score: gameState.score,
         isGameOver: gameState.isGameOver,
         goToNextQuestion,
     }
