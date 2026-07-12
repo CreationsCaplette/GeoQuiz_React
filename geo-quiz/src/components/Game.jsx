@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
 import useHttp from "../hooks/useHttp";
 import Progress from './Progress.jsx';
+import Score from './Score.jsx';
 import Timer from './Timer.jsx';
 import Question from './Question.jsx';
 import GameContext from '../store/GameContext';
@@ -26,7 +27,7 @@ export default function Game() {
     }
 
     function handleGoToNextQuestion() {
-        gameContext.goToNextQuestion();
+        gameContext.goToNextQuestion(questionData.length);
     }
 
     function handleTimeUp() {
@@ -40,9 +41,13 @@ export default function Game() {
         //return <p className="center">Time is up!</p>
     }
 
+    if (gameContext.isGameOver) {
+        return <p className="center">Game Over!</p>
+    }
+
     return (
         <>
-            <div id="score">42</div>
+            <Score />
             <Progress
                 progressIndex={gameContext.questionIndex + 1}
                 questionCount={questionData.length}
