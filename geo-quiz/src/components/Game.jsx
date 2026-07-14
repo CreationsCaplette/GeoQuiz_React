@@ -1,23 +1,23 @@
-import { useContext, useState } from 'react';
-import useHttp from "../hooks/useHttp";
+import { useContext, useRef, useState } from 'react';
 import Progress from './Progress.jsx';
 import Score from './Score.jsx';
 import Timer from './Timer.jsx';
 import Question from './Question.jsx';
 import GameContext from '../store/GameContext';
 
-const requestConfig = {};
-
 export default function Game() {
-    const gameContext = useContext(GameContext);
-    const [timeUp, setTimeUp] = useState(false);
-    const [remainingTimeMs, setRemainingTimeMs] = useState(10000);
-
     const {
-        data: questionData,
+        questions,
+        questionIndex,
+        score,
         isLoading,
-        error
-    } = useHttp('https://localhost:7266/game/capitals', requestConfig, []);
+        isGameOver,
+        error,
+        goToNextQuestion,
+    } = useContext(GameContext);
+
+    const [timeUp, setTimeUp] = useState(false);
+    const remainingTimeMs = useRef(10000);
 
     if (error) {
         return <Error title="Failed to fetch countries data" message={error} />;
@@ -28,7 +28,7 @@ export default function Game() {
     }
 
     function handleGoToNextQuestion() {
-        gameContext.goToNextQuestion(questionData.length, remainingTimeMs);
+        goToNextQuestion(remainingTimeMs.current);
     }
 
     function handleTimeUp() {
@@ -36,31 +36,31 @@ export default function Game() {
     }
 
     function handleTimeChange(timeLeft) {
-        setRemainingTimeMs(timeLeft);
+        remainingTimeMs.current = timeLeft;
     }
 
-    const currentQuestion = questionData?.[gameContext.questionIndex];
+    const currentQuestion = questions?.[questionIndex];
     if (!currentQuestion) return null;
 
     if (timeUp) {
         //return <p className="center">Time is up!</p>
     }
 
-    if (gameContext.isGameOver) {
+    if (isGameOver) {
         return <p className="center">Game Over!</p>
     }
 
     return (
         <>
             <Score
-                score={gameContext.score}
+                score={score}
             />
             <Progress
-                progressIndex={gameContext.questionIndex + 1}
-                questionCount={questionData.length}
+                progressIndex={questionIndex + 1}
+                questionCount={questions.length}
             />
             <Timer
-                key={gameContext.questionIndex}
+                key={questionIndex}
                 initialTime={10000}
                 onTimeUp={handleTimeUp}
                 onTimeChange={handleTimeChange}
