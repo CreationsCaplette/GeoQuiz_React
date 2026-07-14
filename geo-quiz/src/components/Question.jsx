@@ -1,6 +1,7 @@
+import React from "react";
 import Button from './Button.jsx';
 
-export default function Question({ questionData, onNext: onClick }) {
+const Question = React.memo(function Question({ questionData, onNext: onClick }) {
     return (
         <ul id="question">
             <h2>{questionData.question}</h2>
@@ -14,4 +15,6 @@ export default function Question({ questionData, onNext: onClick }) {
             ))}
         </ul >
     );
-}
+});
+
+export default Question
