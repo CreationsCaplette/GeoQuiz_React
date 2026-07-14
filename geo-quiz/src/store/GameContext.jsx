@@ -14,11 +14,11 @@ export function GameContextProvider({ children }) {
         isGameOver: false,
     });
 
-    function goToNextQuestion(questionCount) {
+    function goToNextQuestion(questionCount, pointsToAdd = 0) {
         setGameState((prevState) => ({
             ...prevState,
             questionIndex: prevState.questionIndex + 1,
-            score: prevState.score + 10,
+            score: prevState.score + pointsToAdd,
             isGameOver: prevState.questionIndex + 1 >= questionCount,
         }));
     }

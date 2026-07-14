@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 
-export default function Timer({ initialTime = 10000, onTimeUp }) {
+export default function Timer({ initialTime = 10000, onTimeUp, onTimeChange }) {
     const [timeLeft, setTimeLeft] = useState(initialTime);
+
+    useEffect(() => {
+        onTimeChange?.(timeLeft);
+    }, [timeLeft, onTimeChange]);
 
     useEffect(() => {
         if (timeLeft <= 0) {

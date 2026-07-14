@@ -11,6 +11,7 @@ const requestConfig = {};
 export default function Game() {
     const gameContext = useContext(GameContext);
     const [timeUp, setTimeUp] = useState(false);
+    const [remainingTimeMs, setRemainingTimeMs] = useState(10000);
 
     const {
         data: questionData,
@@ -27,11 +28,15 @@ export default function Game() {
     }
 
     function handleGoToNextQuestion() {
-        gameContext.goToNextQuestion(questionData.length);
+        gameContext.goToNextQuestion(questionData.length, remainingTimeMs);
     }
 
     function handleTimeUp() {
         setTimeUp(true);
+    }
+
+    function handleTimeChange(timeLeft) {
+        setRemainingTimeMs(timeLeft);
     }
 
     const currentQuestion = questionData?.[gameContext.questionIndex];
@@ -58,6 +63,7 @@ export default function Game() {
                 key={gameContext.questionIndex}
                 initialTime={10000}
                 onTimeUp={handleTimeUp}
+                onTimeChange={handleTimeChange}
             />
             <Question id="question"
                 questionData={currentQuestion}
