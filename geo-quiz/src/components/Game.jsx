@@ -51,31 +51,33 @@ export default function Game() {
     }
 
     return (
-        <div className="game-layout">
-            <div className="game-header">
-                <div className="game-header__score">
-                    <Score className="game-header__score" score={score} />
+        <div className="screen">
+            <div className="game-layout">
+                <div className="game-header">
+                    <div className="game-header__score">
+                        <Score score={score} />
+                    </div>
+                    <div className="game-header__progress">
+                        <Progress
+                            progressIndex={questionIndex + 1}
+                            questionCount={questions.length}
+                        />
+                    </div>
                 </div>
-                <div className="game-header__progress">
-                    <Progress
-                        progressIndex={questionIndex + 1}
-                        questionCount={questions.length}
-                    />
-                </div>
+
+                <Timer
+                    key={questionIndex}
+                    initialTime={10000}
+                    onTimeUp={handleTimeUp}
+                    onTimeChange={handleTimeChange}
+                />
+
+                <Question
+                    id="question"
+                    questionData={currentQuestion}
+                    onNext={handleGoToNextQuestion}
+                />
             </div>
-
-
-
-            <Timer
-                key={questionIndex}
-                initialTime={10000}
-                onTimeUp={handleTimeUp}
-                onTimeChange={handleTimeChange}
-            />
-            <Question id="question"
-                questionData={currentQuestion}
-                onNext={handleGoToNextQuestion}
-            />
         </div>
     );
 }

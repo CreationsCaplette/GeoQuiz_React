@@ -14,12 +14,21 @@ export default function Menu() {
     }
 
     return (
-        <ul id="menu">
-            <h3>Geo Quiz</h3>
-            <img src={menuLogo} className="base" width="60" height="60" alt="Globe Logo" />
-            <Button variant='menu' onClick={handleCapitalsGame}>Capitals Game</Button>
-            <Button variant='menu' >Reverse Capitals Game</Button>
-            <Button variant='menu' >Flags Game</Button>
-        </ul>
+        <div className="screen">
+            <h3 className="screen__subtitle">Geo Quiz</h3>
+            <img
+                src={menuLogo}
+                className="screen__image screen__image--small"
+                alt="Globe Logo"
+            />
+
+            <div className="screen__actions">
+                <Button variant="menu" onClick={handleCapitalsGame}>
+                    Capitals Game
+                </Button>
+                <Button variant="menu">Reverse Capitals Game</Button>
+                <Button variant="menu">Flags Game</Button>
+            </div>
+        </div>
     );
 }

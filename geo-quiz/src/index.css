@@ -1,13 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Kadwa:wght@400;700&display=swap");
 
-#root {
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  place-content: center;
-  place-items: center;
-}
-
 body {
   margin: 0;
   font-family: "Kadwa";
@@ -17,38 +9,64 @@ body {
   color: #00b8f0;
 }
 
-h1 {
-  font-family: "Kadwa";
-  font-size: 3rem;
-  font-weight: 400;
-  margin: 0;
-  text-align: center;
+#root {
+  min-height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
 }
 
-h2 {
-  color: #f5f5f5;
-  font-family: "Kadwa";
-  font-size: 1.625rem;
-  font-weight: 400;
-  margin: 0;
-  text-align: center;
-  width: 260px;
-}
-
-h3 {
-  font-family: "Kadwa";
-  font-size: 1.5625rem;
-  font-weight: 400;
-  margin: 0;
-  text-align: center;
-}
-
-#menu {
+.screen {
+  width: min(100%, 480px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 40px;
-  padding: 0;
+  gap: 24px;
+  text-align: center;
+}
+
+.screen__title,
+.screen__subtitle {
+  font-family: "Kadwa";
+  font-weight: 400;
+  margin: 0;
+}
+
+.screen__title {
+  font-size: 3rem;
+}
+
+.screen__subtitle {
+  font-size: 1.5625rem;
+}
+
+.screen__image {
+  display: block;
+}
+
+.screen__image--hero {
+  width: 291px;
+  height: 315px;
+}
+
+.screen__image--brand {
+  width: 134px;
+  height: 75px;
+}
+
+.screen__image--small {
+  width: 60px;
+  height: 60px;
+}
+
+.screen__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
 }
 
 .game-layout {
@@ -137,8 +155,4 @@ h3 {
 
 .button.game.invalid {
   background-color: #ac191a;
-}
-
-.game-flag {
-  height: 60px;
 }
