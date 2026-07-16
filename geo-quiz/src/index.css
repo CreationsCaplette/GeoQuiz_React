@@ -21,6 +21,7 @@ h1 {
   font-family: "Kadwa";
   font-size: 3rem;
   font-weight: 400;
+  margin: 0;
   text-align: center;
 }
 
@@ -47,6 +48,31 @@ h3 {
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  padding: 0;
+}
+
+.game-layout {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.game-header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.game-header__score {
+  justify-self: start;
+}
+
+.game-header__progress {
+  justify-self: end;
 }
 
 #score {

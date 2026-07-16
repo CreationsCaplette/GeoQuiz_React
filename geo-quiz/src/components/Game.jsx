@@ -51,14 +51,21 @@ export default function Game() {
     }
 
     return (
-        <>
-            <Score
-                score={score}
-            />
-            <Progress
-                progressIndex={questionIndex + 1}
-                questionCount={questions.length}
-            />
+        <div className="game-layout">
+            <div className="game-header">
+                <div className="game-header__score">
+                    <Score className="game-header__score" score={score} />
+                </div>
+                <div className="game-header__progress">
+                    <Progress
+                        progressIndex={questionIndex + 1}
+                        questionCount={questions.length}
+                    />
+                </div>
+            </div>
+
+
+
             <Timer
                 key={questionIndex}
                 initialTime={10000}
@@ -69,6 +76,6 @@ export default function Game() {
                 questionData={currentQuestion}
                 onNext={handleGoToNextQuestion}
             />
-        </>
+        </div>
     );
 }
