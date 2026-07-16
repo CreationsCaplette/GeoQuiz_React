@@ -4,7 +4,7 @@ import Button from './Button.jsx';
 const Question = React.memo(function Question({ questionData, onNext: onClick }) {
     return (
         <ul id="question">
-            <h2>{questionData.question}</h2>
+            <h2 className="game-question">{questionData.question}</h2>
             {questionData.choices.map((choice) => (
                 <Button
                     key={questionData.question + '-' + choice}

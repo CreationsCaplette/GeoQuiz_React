@@ -23,5 +23,5 @@ export default function Timer({ initialTime = 10000, onTimeUp, onTimeChange }) {
     const seconds = Math.ceil(timeLeft / 1000);
     const formattedTime = `0:${seconds < 10 ? `0${seconds}` : seconds}`;
 
-    return (<div id="timer">{formattedTime}</div>);
+    return (<div className='game-timer'>{formattedTime}</div>);
 }

@@ -22,13 +22,11 @@ export default function Menu() {
                 alt="Globe Logo"
             />
 
-            <div className="screen__actions">
-                <Button variant="menu" onClick={handleCapitalsGame}>
-                    Capitals Game
-                </Button>
-                <Button variant="menu">Reverse Capitals Game</Button>
-                <Button variant="menu">Flags Game</Button>
-            </div>
+            <Button variant="menu" onClick={handleCapitalsGame}>
+                Capitals Game
+            </Button>
+            <Button variant="menu">Reverse Capitals Game</Button>
+            <Button variant="menu">Flags Game</Button>
         </div>
     );
 }
