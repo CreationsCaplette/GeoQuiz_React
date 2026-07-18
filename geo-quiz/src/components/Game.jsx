@@ -85,7 +85,6 @@ export default function Game() {
                 onChoiceClick={onAnswer}
                 isAnswered={hasAnswered}
                 selectedChoice={selectedChoice}
-                isCorrect={isCorrect}
             />
             <NextQuestionButton
                 onClick={onNextQuestion}

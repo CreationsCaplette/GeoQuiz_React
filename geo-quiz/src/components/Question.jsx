@@ -6,17 +6,16 @@ const Question = React.memo(function Question({
     onChoiceClick: onChoiceClick,
     isAnswered,
     selectedChoice,
-    isCorrect,
 }) {
     const getChoiceClass = (choice) => {
-        if (!isAnswered || choice !== selectedChoice)
+        if (!isAnswered || (choice !== selectedChoice && choice !== questionData.answer))
             return "";
-        return isCorrect ? 'positive' : 'negative';
+        return choice === questionData.answer ? 'positive' : 'negative';
     };
 
     return (
         <div id="question">
-            <h2 className="game-question">{questionData.question}</h2>
+            <h2 className="game-question">{questionData.question + ' - ' + questionData.answer}</h2>
             {questionData.choices.map((choice) => (
                 <Button
                     key={questionData.question + '-' + choice}
