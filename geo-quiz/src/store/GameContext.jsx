@@ -7,7 +7,6 @@ const initialState = {
     isGameOver: false,
     selectedChoice: null,
     hasAnswered: false,
-    isCorrect: null,
 };
 
 function gameReducer(state, action) {
@@ -17,11 +16,9 @@ function gameReducer(state, action) {
             return {
                 ...state,
                 questionIndex: nextIndex,
-                score: state.score + action.points,
                 isGameOver: nextIndex >= action.questionCount,
                 selectedChoice: null,
                 hasAnswered: false,
-                isCorrect: null,
             };
         }
         case "ANSWER":
@@ -29,7 +26,7 @@ function gameReducer(state, action) {
                 ...state,
                 selectedChoice: action.choice,
                 hasAnswered: true,
-                isCorrect: action.isCorrect,
+                score: state.score + action.points,
             };
         case "RESET":
             return initialState;
@@ -47,7 +44,6 @@ const GameContext = createContext({
     error: null,
     selectedChoice: null,
     hasAnswered: false,
-    isCorrect: null,
     handleAnswer: () => { },
     goToNextQuestion: () => { },
     resetGame: () => { },
@@ -63,25 +59,25 @@ export function GameContextProvider({ children }) {
     );
 
     const handleAnswer = useCallback(
-        (choice) => {
+        (choice, timeLeft) => {
             const currentQuestion = questions?.[gameState.questionIndex];
             if (!currentQuestion) return;
 
             const isCorrect = currentQuestion.answer === choice;
             dispatch({
                 type: "ANSWER",
-                choice, isCorrect,
+                choice,
+                points: isCorrect ? timeLeft : 0
             });
         },
         [questions, gameState.questionIndex]
     );
 
     const goToNextQuestion = useCallback(
-        (pointsToAdd = 0) => {
+        () => {
             dispatch({
                 type: "NEXT",
                 questionCount: questions?.length ?? 0,
-                points: pointsToAdd
             })
         },
         [questions?.length]
@@ -101,7 +97,6 @@ export function GameContextProvider({ children }) {
             error,
             selectedChoice: gameState.selectedChoice,
             hasAnswered: gameState.hasAnswered,
-            isCorrect: gameState.isCorrect,
             handleAnswer,
             goToNextQuestion,
             resetGame,
@@ -113,7 +108,6 @@ export function GameContextProvider({ children }) {
             gameState.isGameOver,
             gameState.selectedChoice,
             gameState.hasAnswered,
-            gameState.isCorrect,
             isLoading,
             error,
             handleAnswer,

@@ -15,7 +15,7 @@ const Question = React.memo(function Question({
 
     return (
         <div id="question">
-            <h2 className="game-question">{questionData.question + ' - ' + questionData.answer}</h2>
+            <h2 className="game-question">{questionData.question}</h2>
             {questionData.choices.map((choice) => (
                 <Button
                     key={questionData.question + '-' + choice}

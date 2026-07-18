@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react';
+import { useContext, useRef } from 'react';
 import Progress from './Progress.jsx';
 import Score from './Score.jsx';
 import Timer from './Timer.jsx';
@@ -16,12 +16,10 @@ export default function Game() {
         error,
         selectedChoice,
         hasAnswered,
-        isCorrect,
         handleAnswer,
         goToNextQuestion,
     } = useContext(GameContext);
 
-    const [timeUp, setTimeUp] = useState(false);
     const remainingTimeMs = useRef(10000);
 
     if (error) {
@@ -33,15 +31,15 @@ export default function Game() {
     }
 
     function onNextQuestion() {
-        goToNextQuestion(remainingTimeMs.current);
+        goToNextQuestion();
     }
 
     function onAnswer(choice) {
-        handleAnswer(choice);
+        handleAnswer(choice, remainingTimeMs.current);
     }
 
     function handleTimeUp() {
-        setTimeUp(true);
+        handleAnswer();
     }
 
     function handleTimeChange(timeLeft) {
@@ -50,10 +48,6 @@ export default function Game() {
 
     const currentQuestion = questions?.[questionIndex];
     if (!currentQuestion) return null;
-
-    if (timeUp) {
-        //return <p className="center">Time is up!</p>
-    }
 
     if (isGameOver) {
         //return <p className="center">Game Over!</p>
