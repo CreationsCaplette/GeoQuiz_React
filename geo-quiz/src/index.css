@@ -20,7 +20,7 @@ body {
 }
 
 .screen {
-  width: min(100%, 480px);
+  width: min(100%, 400px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -159,4 +159,10 @@ body {
   padding: 12px;
   color: #ffffff;
   cursor: pointer;
+}
+
+.next-question-button.hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }

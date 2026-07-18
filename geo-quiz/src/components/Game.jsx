@@ -50,7 +50,7 @@ export default function Game() {
     if (!currentQuestion) return null;
 
     if (isGameOver) {
-        //return <p className="center">Game Over!</p>
+        return <p className="center">Game Over!</p>
     }
 
     return (
