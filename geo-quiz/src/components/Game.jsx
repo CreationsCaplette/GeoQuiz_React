@@ -3,6 +3,7 @@ import Progress from './Progress.jsx';
 import Score from './Score.jsx';
 import Timer from './Timer.jsx';
 import Question from './Question.jsx';
+import NextQuestionButton from './NextQuestionButton.jsx';
 import GameContext from '../store/GameContext';
 
 export default function Game() {
@@ -81,10 +82,14 @@ export default function Game() {
 
             <Question
                 questionData={currentQuestion}
-                onChoice={onAnswer}
+                onChoiceClick={onAnswer}
                 isAnswered={hasAnswered}
                 selectedChoice={selectedChoice}
                 isCorrect={isCorrect}
+            />
+            <NextQuestionButton
+                onClick={onNextQuestion}
+                isVisible={hasAnswered}
             />
         </div>
     );

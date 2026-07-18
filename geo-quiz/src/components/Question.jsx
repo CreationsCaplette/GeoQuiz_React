@@ -3,7 +3,7 @@ import Button from './Button.jsx';
 
 const Question = React.memo(function Question({
     questionData,
-    onChoice: onClick,
+    onChoiceClick: onChoiceClick,
     isAnswered,
     selectedChoice,
     isCorrect,
@@ -23,7 +23,7 @@ const Question = React.memo(function Question({
                     variant='game'
                     className={getChoiceClass(choice)}
                     disabled={isAnswered}
-                    onClick={() => onClick(choice)}
+                    onClick={() => onChoiceClick(choice)}
                 >
                     {choice}
                 </Button>
