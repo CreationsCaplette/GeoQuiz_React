@@ -1,7 +1,19 @@
 import React from "react";
 import Button from './Button.jsx';
 
-const Question = React.memo(function Question({ questionData, onNext: onClick }) {
+const Question = React.memo(function Question({
+    questionData,
+    onChoice: onClick,
+    isAnswered,
+    selectedChoice,
+    isCorrect,
+}) {
+    const getChoiceClass = (choice) => {
+        if (!isAnswered || choice !== selectedChoice)
+            return "";
+        return isCorrect ? 'positive' : 'negative';
+    };
+
     return (
         <ul id="question">
             <h2 className="game-question">{questionData.question}</h2>
@@ -9,7 +21,10 @@ const Question = React.memo(function Question({ questionData, onNext: onClick })
                 <Button
                     key={questionData.question + '-' + choice}
                     variant='game'
-                    onClick={onClick}>
+                    className={getChoiceClass(choice)}
+                    disabled={isAnswered}
+                    onClick={() => onClick(choice)}
+                >
                     {choice}
                 </Button>
             ))}

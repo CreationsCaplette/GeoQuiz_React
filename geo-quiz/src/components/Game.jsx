@@ -13,6 +13,10 @@ export default function Game() {
         isLoading,
         isGameOver,
         error,
+        selectedChoice,
+        hasAnswered,
+        isCorrect,
+        handleAnswer,
         goToNextQuestion,
     } = useContext(GameContext);
 
@@ -27,8 +31,12 @@ export default function Game() {
         return <p className="center">Fetching countries data...</p>
     }
 
-    function handleGoToNextQuestion() {
+    function onNextQuestion() {
         goToNextQuestion(remainingTimeMs.current);
+    }
+
+    function onAnswer(choice) {
+        handleAnswer(choice);
     }
 
     function handleTimeUp() {
@@ -47,7 +55,7 @@ export default function Game() {
     }
 
     if (isGameOver) {
-        return <p className="center">Game Over!</p>
+        //return <p className="center">Game Over!</p>
     }
 
     return (
@@ -72,9 +80,11 @@ export default function Game() {
             />
 
             <Question
-                id="question"
                 questionData={currentQuestion}
-                onNext={handleGoToNextQuestion}
+                onChoice={onAnswer}
+                isAnswered={hasAnswered}
+                selectedChoice={selectedChoice}
+                isCorrect={isCorrect}
             />
         </div>
     );

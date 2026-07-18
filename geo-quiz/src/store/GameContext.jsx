@@ -5,6 +5,9 @@ const initialState = {
     questionIndex: 0,
     score: 0,
     isGameOver: false,
+    selectedChoice: null,
+    hasAnswered: false,
+    isCorrect: null,
 };
 
 function gameReducer(state, action) {
@@ -16,8 +19,18 @@ function gameReducer(state, action) {
                 questionIndex: nextIndex,
                 score: state.score + action.points,
                 isGameOver: nextIndex >= action.questionCount,
+                selectedChoice: null,
+                hasAnswered: false,
+                isCorrect: null,
             };
         }
+        case "ANSWER":
+            return {
+                ...state,
+                selectedChoice: action.choice,
+                hasAnswered: true,
+                isCorrect: action.isCorrect,
+            };
         case "RESET":
             return initialState;
         default:
@@ -32,6 +45,10 @@ const GameContext = createContext({
     isLoading: false,
     isGameOver: false,
     error: null,
+    selectedChoice: null,
+    hasAnswered: false,
+    isCorrect: null,
+    handleAnswer: () => { },
     goToNextQuestion: () => { },
     resetGame: () => { },
 });
@@ -45,9 +62,30 @@ export function GameContextProvider({ children }) {
         []
     );
 
-    const goToNextQuestion = useCallback((questionCount, pointsToAdd = 0) => {
-        dispatch({ type: "NEXT", questionCount, points: pointsToAdd })
-    }, []);
+    const handleAnswer = useCallback(
+        (choice) => {
+            const currentQuestion = questions?.[gameState.questionIndex];
+            if (!currentQuestion) return;
+
+            const isCorrect = currentQuestion.answer === choice;
+            dispatch({
+                type: "ANSWER",
+                choice, isCorrect,
+            });
+        },
+        [questions, gameState.questionIndex]
+    );
+
+    const goToNextQuestion = useCallback(
+        (pointsToAdd = 0) => {
+            dispatch({
+                type: "NEXT",
+                questionCount: questions?.length ?? 0,
+                points: pointsToAdd
+            })
+        },
+        [questions?.length]
+    );
 
     const resetGame = useCallback(() => {
         dispatch({ type: "RESET" });
@@ -61,10 +99,27 @@ export function GameContextProvider({ children }) {
             isLoading,
             isGameOver: gameState.isGameOver,
             error,
+            selectedChoice: gameState.selectedChoice,
+            hasAnswered: gameState.hasAnswered,
+            isCorrect: gameState.isCorrect,
+            handleAnswer,
             goToNextQuestion,
             resetGame,
         }),
-        [questions, gameState.questionIndex, gameState.score, gameState.isGameOver, isLoading, error, goToNextQuestion, resetGame]
+        [
+            questions,
+            gameState.questionIndex,
+            gameState.score,
+            gameState.isGameOver,
+            gameState.selectedChoice,
+            gameState.hasAnswered,
+            gameState.isCorrect,
+            isLoading,
+            error,
+            handleAnswer,
+            goToNextQuestion,
+            resetGame,
+        ]
     );
 
     return <GameContext.Provider value={value}>{children}</GameContext.Provider>
