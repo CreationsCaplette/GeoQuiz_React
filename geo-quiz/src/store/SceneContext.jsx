@@ -4,6 +4,7 @@ const SceneContext = createContext({
     scene: 'splash',
     goToMenu: () => { },
     goToCapitalsGame: () => { },
+    goToAbout: () => { },
 });
 
 export function SceneContextProvider({ children }) {
@@ -17,10 +18,15 @@ export function SceneContextProvider({ children }) {
         setScene('capitalsGame');
     }
 
+    function goToAbout() {
+        setScene('about');
+    }
+
     const sceneContext = {
         scene: scene,
         goToMenu,
         goToCapitalsGame,
+        goToAbout,
     }
 
     return (
