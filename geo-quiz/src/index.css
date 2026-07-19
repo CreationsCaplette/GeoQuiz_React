@@ -112,12 +112,6 @@ body {
   text-align: center;
 }
 
-.screen.game-over {
-  background-image: url("./assets/stars.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: 318px 732px;
-}
 .game-over-title {
   color: #f5f5f5;
   font-size: 1.625rem;
