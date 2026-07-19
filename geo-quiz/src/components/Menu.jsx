@@ -13,6 +13,10 @@ export default function Menu() {
         sceneContext.goToCapitalsGame();
     }
 
+    function handleAbout() {
+        sceneContext.goToAbout();
+    }
+
     return (
         <div className="screen">
             <h3 className="screen__subtitle">Geo Quiz</h3>
@@ -27,6 +31,7 @@ export default function Menu() {
             </Button>
             <Button variant="menu">Reverse Capitals Game</Button>
             <Button variant="menu">Flags Game</Button>
+            <Button variant="text" onClick={handleAbout}>About</Button>
         </div>
     );
 }

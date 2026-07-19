@@ -4,9 +4,7 @@ export default function Button({
     className = '',
     ...props
 }) {
-    const classes = ['button', variant === 'game' ? 'game' : 'menu', className]
-        .filter(Boolean)
-        .join(' ');
+    const classes = ['button', variant, className].filter(Boolean).join(' ');
 
     return <button className={classes} {...props}>{children}</button>;
 }

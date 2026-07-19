@@ -150,6 +150,22 @@ body {
   color: #f5f5f5;
 }
 
+.button.text {
+  background: transparent;
+  border: none;
+  padding: 10px;
+  color: #f5f5f5;
+  width: auto;
+  height: auto;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.button.text:hover {
+  text-decoration: underline;
+  border: none;
+}
+
 .next-question-button {
   display: flex;
   justify-content: center;
