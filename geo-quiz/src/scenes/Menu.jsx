@@ -4,7 +4,7 @@ import menuLogo from '../assets/globe_small.svg';
 
 import SceneContext from '../store/SceneContext.jsx';
 
-import Button from './Button.jsx';
+import Button from '../components/Button.jsx';
 
 export default function Menu() {
     const sceneContext = useContext(SceneContext);

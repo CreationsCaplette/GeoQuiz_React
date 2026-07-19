@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 
-import Splash from "./components/Splash.jsx";
-import Menu from './components/Menu.jsx';
-import Game from './components/Game.jsx';
+import Splash from "./scenes/Splash.jsx";
+import Menu from './scenes/Menu.jsx';
+import Game from './scenes/Game.jsx';
 import About from './scenes/About.jsx';
 
 import { SceneContextProvider } from './store/SceneContext.jsx';
