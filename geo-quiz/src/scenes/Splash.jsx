@@ -1,5 +1,4 @@
 import { useEffect, useContext } from 'react';
-
 import titleLogo from '../assets/globe.svg';
 import creationsLogo from '../assets/creations.svg';
 import SceneContext from '../store/SceneContext';

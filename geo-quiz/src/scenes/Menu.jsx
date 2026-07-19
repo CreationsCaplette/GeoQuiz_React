@@ -1,16 +1,17 @@
 import { useContext } from 'react';
-
 import menuLogo from '../assets/globe_small.svg';
-
 import SceneContext from '../store/SceneContext.jsx';
-
-import Button from './Button.jsx';
+import Button from '../components/Button.jsx';
 
 export default function Menu() {
     const sceneContext = useContext(SceneContext);
 
     function handleCapitalsGame() {
         sceneContext.goToCapitalsGame();
+    }
+
+    function handleAbout() {
+        sceneContext.goToAbout();
     }
 
     return (
@@ -27,6 +28,7 @@ export default function Menu() {
             </Button>
             <Button variant="menu">Reverse Capitals Game</Button>
             <Button variant="menu">Flags Game</Button>
+            <Button variant="text" onClick={handleAbout}>About</Button>
         </div>
     );
 }

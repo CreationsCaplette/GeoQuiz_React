@@ -1,10 +1,10 @@
 import { useContext, useRef } from 'react';
-import Progress from './Progress.jsx';
-import Score from './Score.jsx';
-import Timer from './Timer.jsx';
-import Question from './Question.jsx';
-import NextQuestionButton from './NextQuestionButton.jsx';
-import GameContext from '../store/GameContext';
+import Progress from '../components/Progress.jsx';
+import Score from '../components/Score.jsx';
+import Timer from '../components/Timer.jsx';
+import Question from '../components/Question.jsx';
+import NextQuestionButton from '../components/NextQuestionButton.jsx';
+import GameContext from '../store/GameContext.jsx';
 
 export default function Game() {
     const {
