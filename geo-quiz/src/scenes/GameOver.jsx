@@ -17,19 +17,22 @@ export default function Menu() {
     } = useContext(GameContext);
 
     const resultByRange = [
-        { min: 800, src: faceExcellent, encouragement: "Wow! Excellent!" },
-        { min: 600, src: faceGood, encouragement: "Very well!" },
-        { min: 300, src: faceOkay, encouragement: "Keep on learning!" },
-        { min: 0, src: faceBad, encouragement: "Learn more!" },
+        { min: 800, src: faceExcellent, encouragement: "Wow! Excellent!", stars: true },
+        { min: 600, src: faceGood, encouragement: "Very well!", stars: false },
+        { min: 300, src: faceOkay, encouragement: "Keep on learning!", stars: false },
+        { min: 0, src: faceBad, encouragement: "Learn more!", stars: false },
     ];
 
     const result = resultByRange.find(item => score >= item.min);
 
     return (
         <div className="screen">
+            {result.stars && (
+                <img src={stars} className="screen__image screen__image--background" alt="Stars background" />
+            )}
             <h2 className="game-over-title">Result</h2>
             <p className="game-over-score">Score: {score}</p>
-            <p className="game-over-best-score">You best score: 0</p>
+            {/* <p className="game-over-best-score">You best score: 0</p> */}
             <p className="game-over-ecouragement">{result.encouragement}</p>
             <img
                 src={result.src}
@@ -37,7 +40,7 @@ export default function Menu() {
                 alt="Result face"
             />
             <PreviousButton onClick={() => goToScene(SCENES.menu)}>
-                Go Back
+                Go To The Menu
             </PreviousButton>
         </div>
     );

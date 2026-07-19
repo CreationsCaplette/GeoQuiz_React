@@ -20,6 +20,7 @@ body {
 }
 
 .screen {
+  position: relative;
   width: min(100%, 400px);
   display: flex;
   flex-direction: column;
@@ -76,6 +77,19 @@ body {
 
 .screen__image--arrow--mirrored {
   transform: scaleX(-1);
+}
+
+.screen__image--background {
+  position: absolute;
+  width: 318px;
+  height: 731px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.8;
+  object-fit: contain;
+  z-index: -1;
+  pointer-events: none;
 }
 
 .game-header {
