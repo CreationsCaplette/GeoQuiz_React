@@ -3,7 +3,7 @@ import Progress from '../components/Progress.jsx';
 import Score from '../components/Score.jsx';
 import Timer from '../components/Timer.jsx';
 import Question from '../components/Question.jsx';
-import NextQuestionButton from '../components/NextQuestionButton.jsx';
+import NextButton from '../components/NextButton.jsx';
 import GameContext from '../store/GameContext.jsx';
 
 export default function Game() {
@@ -80,10 +80,12 @@ export default function Game() {
                 isAnswered={hasAnswered}
                 selectedChoice={selectedChoice}
             />
-            <NextQuestionButton
+            <NextButton
                 onClick={onNextQuestion}
                 isVisible={hasAnswered}
-            />
+            >
+                Next Question
+            </NextButton>
         </div>
     );
 }

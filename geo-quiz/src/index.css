@@ -74,6 +74,10 @@ body {
   width: 37px;
 }
 
+.screen__image--arrow--mirrored {
+  transform: scaleX(-1);
+}
+
 .game-header {
   width: 100%;
   display: grid;
@@ -175,7 +179,8 @@ body {
   border: none;
 }
 
-.next-question-button {
+.next-button,
+.previous-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -187,7 +192,7 @@ body {
   cursor: pointer;
 }
 
-.next-question-button.hidden {
+.next-button.hidden {
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
