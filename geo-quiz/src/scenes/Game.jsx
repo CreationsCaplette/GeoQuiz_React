@@ -1,12 +1,16 @@
 import { useContext, useRef } from 'react';
+import SceneContext from '../store/SceneContext.jsx';
+import { SCENES } from "../store/scenes.js";
 import Progress from '../components/Progress.jsx';
 import Score from '../components/Score.jsx';
 import Timer from '../components/Timer.jsx';
 import Question from '../components/Question.jsx';
-import NextQuestionButton from '../components/NextQuestionButton.jsx';
+import NextButton from '../components/NextButton.jsx';
 import GameContext from '../store/GameContext.jsx';
 
 export default function Game() {
+    const { goToScene } = useContext(SceneContext);
+
     const {
         questions,
         questionIndex,
@@ -46,12 +50,12 @@ export default function Game() {
         remainingTimeMs.current = timeLeft;
     }
 
+    if (isGameOver) {
+        goToScene(SCENES.gameOver);
+    }
+
     const currentQuestion = questions?.[questionIndex];
     if (!currentQuestion) return null;
-
-    if (isGameOver) {
-        return <p className="center">Game Over!</p>
-    }
 
     return (
         <div className="screen">
@@ -72,6 +76,7 @@ export default function Game() {
                 initialTime={10000}
                 onTimeUp={handleTimeUp}
                 onTimeChange={handleTimeChange}
+                isPaused={hasAnswered}
             />
 
             <Question
@@ -80,10 +85,12 @@ export default function Game() {
                 isAnswered={hasAnswered}
                 selectedChoice={selectedChoice}
             />
-            <NextQuestionButton
+            <NextButton
                 onClick={onNextQuestion}
                 isVisible={hasAnswered}
-            />
+            >
+                Next Question
+            </NextButton>
         </div>
     );
 }

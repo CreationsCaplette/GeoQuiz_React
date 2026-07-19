@@ -67,7 +67,7 @@ export function GameContextProvider({ children }) {
             dispatch({
                 type: "ANSWER",
                 choice,
-                points: isCorrect ? timeLeft : 0
+                points: isCorrect ? Math.ceil(timeLeft / 100) : 0
             });
         },
         [questions, gameState.questionIndex]

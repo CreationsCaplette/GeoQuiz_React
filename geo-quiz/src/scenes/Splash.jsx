@@ -2,17 +2,18 @@ import { useEffect, useContext } from 'react';
 import titleLogo from '../assets/globe.svg';
 import creationsLogo from '../assets/creations.svg';
 import SceneContext from '../store/SceneContext';
+import { SCENES } from "../store/scenes.js";
 
 const TIMEOUT = 3000;
 
 export default function Splash() {
-    const sceneContext = useContext(SceneContext)
+    const { goToScene } = useContext(SceneContext)
 
     useEffect(() => {
-        const timer = setTimeout(sceneContext.goToMenu, TIMEOUT);
+        const timer = setTimeout(() => goToScene(SCENES.menu), TIMEOUT);
 
         return () => { clearTimeout(timer) };
-    });
+    }, [goToScene]);
 
 
     return (

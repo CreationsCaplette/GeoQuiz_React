@@ -20,6 +20,7 @@ body {
 }
 
 .screen {
+  position: relative;
   width: min(100%, 400px);
   display: flex;
   flex-direction: column;
@@ -74,6 +75,23 @@ body {
   width: 37px;
 }
 
+.screen__image--arrow--mirrored {
+  transform: scaleX(-1);
+}
+
+.screen__image--background {
+  position: absolute;
+  width: 318px;
+  height: 731px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.8;
+  object-fit: contain;
+  z-index: -1;
+  pointer-events: none;
+}
+
 .game-header {
   width: 100%;
   display: grid;
@@ -102,6 +120,38 @@ body {
 
 .game-question {
   color: #f5f5f5;
+  font-size: 1.625rem;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+}
+
+.game-over-title {
+  color: #f5f5f5;
+  font-size: 1.625rem;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+}
+
+.game-over-score {
+  color: #f5f5f5;
+  font-size: 2.1875rem;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+}
+
+.game-over-best-score {
+  color: #f5f5f5;
+  font-size: 0.875rem;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
+}
+
+.game-over-ecouragement {
+  color: #ffcf27;
   font-size: 1.625rem;
   font-weight: 400;
   margin: 0;
@@ -175,7 +225,8 @@ body {
   border: none;
 }
 
-.next-question-button {
+.next-button,
+.previous-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -187,7 +238,7 @@ body {
   cursor: pointer;
 }
 
-.next-question-button.hidden {
+.next-button.hidden {
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
