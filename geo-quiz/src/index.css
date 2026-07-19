@@ -1,52 +1,102 @@
-@import url('https://fonts.googleapis.com/css2?family=Kadwa:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Kadwa:wght@400;700&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Kadwa";
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #004047;
+  color: #00b8f0;
+}
 
 #root {
   min-height: 100svh;
   display: flex;
-  flex-direction: column;
-  place-content: center;
-  place-items: center;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  font-family: 'Kadwa';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #004047;
-  color: #00B8F0;
-}
-
-h1 {
-  font-family: 'Kadwa';
-  font-size: 3rem;
-  font-weight: 400;
-  text-align: center;
-}
-
-h2 {
-  color: #F5F5F5;
-  font-family: 'Kadwa';
-  font-size: 1.625rem;
-  font-weight: 400;
-  margin: 0;
-  text-align: center;
-  width: 260px;
-}
-
-h3 {
-  font-family: 'Kadwa';
-  font-size: 1.5625rem;
-  font-weight: 400;
-  margin: 0;
-  text-align: center;
-}
-
-#menu {
+.screen {
+  width: min(100%, 400px);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  text-align: center;
+}
+
+.screen__title,
+.screen__subtitle {
+  font-weight: 400;
+  margin: 0;
+}
+
+.screen__title {
+  font-size: 3rem;
+}
+
+.screen__subtitle {
+  font-size: 1.5625rem;
+}
+
+.screen__image {
+  display: block;
+}
+
+.screen__image--hero {
+  width: 291px;
+  height: 315px;
+}
+
+.screen__image--brand {
+  width: 134px;
+  height: 75px;
+}
+
+.screen__image--small {
+  width: 60px;
+  height: 60px;
+}
+
+.screen__image--arrow {
+  width: 37px;
+}
+
+.game-header {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.game-header__score {
+  justify-self: start;
+}
+
+.game-header__progress {
+  justify-self: end;
+}
+
+.game-controls {
+  color: #f5f5f5;
+  font-size: 1rem;
+}
+
+.game-timer {
+  color: #00b8f0;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.game-question {
+  color: #f5f5f5;
+  font-size: 1.625rem;
+  font-weight: 400;
+  margin: 0;
+  text-align: center;
 }
 
 #question {
@@ -54,13 +104,15 @@ h3 {
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  padding-inline-start: 0;
+  margin: 0;
 }
 
 .button {
-  background-color: #006B76;
-  border: 1px solid #00B8F0;
+  background-color: #006b76;
+  border: 1px solid #00b8f0;
   border-radius: 40px;
-  color: #F5F5F5;
+  color: #f5f5f5;
   padding: 10px;
   text-align: center;
   display: inline-block;
@@ -69,32 +121,49 @@ h3 {
   width: 260px;
 }
 
-.button:hover {
-  border: 3px solid #00B8F0;
+.button:not(:disabled):hover {
+  border: 3px solid #00b8f0;
 }
 
 .button.game {
-  background-color: #F5F5F5;
-  color: #006B76;
+  background-color: #f5f5f5;
+  color: #006b76;
 }
 
-.button.game:hover {
-  background-color: #00B8F0;
-  color: #F5F5F5;
+.button.game:not(:disabled):hover {
+  background-color: #00b8f0;
+  color: #f5f5f5;
 }
 
-.button.game.disabled {
-  background-color: #BAB5B5;
+.button.game:disabled {
+  background-color: #bab5b5;
+  color: #f5f5f5;
 }
 
-.button.game.valid {
-  background-color: #00BD71;
+.button.game.positive {
+  background-color: #00bd71;
+  color: #f5f5f5;
 }
 
-.button.game.invalid {
-  background-color: #AC191A;
+.button.game.negative {
+  background-color: #ac191a;
+  color: #f5f5f5;
 }
 
-.game-flag {
-  height: 60px;
+.next-question-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: none;
+  padding: 12px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.next-question-button.hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }

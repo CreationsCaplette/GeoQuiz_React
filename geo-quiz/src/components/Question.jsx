@@ -1,12 +1,34 @@
+import React from "react";
 import Button from './Button.jsx';
 
-export default function Question({ question, choices }) {
+const Question = React.memo(function Question({
+    questionData,
+    onChoiceClick: onChoiceClick,
+    isAnswered,
+    selectedChoice,
+}) {
+    const getChoiceClass = (choice) => {
+        if (!isAnswered || (choice !== selectedChoice && choice !== questionData.answer))
+            return "";
+        return choice === questionData.answer ? 'positive' : 'negative';
+    };
+
     return (
-        <>
-            <h2>{question}</h2>
-            {choices.map((choice) => (
-                <Button variant='game' key={question.question + '-' + choice}>{choice}</Button>
+        <div id="question">
+            <h2 className="game-question">{questionData.question}</h2>
+            {questionData.choices.map((choice) => (
+                <Button
+                    key={questionData.question + '-' + choice}
+                    variant='game'
+                    className={getChoiceClass(choice)}
+                    disabled={isAnswered}
+                    onClick={() => onChoiceClick(choice)}
+                >
+                    {choice}
+                </Button>
             ))}
-        </>
+        </div >
     );
-}
+});
+
+export default Question

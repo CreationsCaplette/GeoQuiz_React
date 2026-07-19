@@ -1,7 +1,12 @@
-export default function MenuButton({ children, variant = 'menu', ...props }) {
-    return (
-        <button className={`button ${variant === 'game' ? 'game' : 'menu'}`} {...props}>
-            {children}
-        </button>
-    );
+export default function Button({
+    children,
+    variant = 'menu',
+    className = '',
+    ...props
+}) {
+    const classes = ['button', variant === 'game' ? 'game' : 'menu', className]
+        .filter(Boolean)
+        .join(' ');
+
+    return <button className={classes} {...props}>{children}</button>;
 }
