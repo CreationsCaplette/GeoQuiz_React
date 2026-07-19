@@ -1,4 +1,6 @@
 import { useContext, useRef } from 'react';
+import SceneContext from '../store/SceneContext.jsx';
+import { SCENES } from "../store/scenes.js";
 import Progress from '../components/Progress.jsx';
 import Score from '../components/Score.jsx';
 import Timer from '../components/Timer.jsx';

@@ -4,13 +4,10 @@ import creationsLogo from '../assets/creations.svg';
 import Button from '../components/Button.jsx';
 import PreviousButton from '../components/PreviousButton.jsx';
 import SceneContext from '../store/SceneContext.jsx';
+import { SCENES } from "../store/scenes.js";
 
 export default function About() {
-    const sceneContext = useContext(SceneContext);
-
-    function onBack() {
-        sceneContext.goToMenu();
-    }
+    const { goToScene } = useContext(SceneContext);
 
     return (
         <div className="screen about">
@@ -31,7 +28,7 @@ export default function About() {
             <a href="mailto:david.caplette@gmail.com?subject=Geo%20Quiz">
                 <Button variant="menu">Contact us</Button>
             </a>
-            <PreviousButton onClick={onBack}>
+            <PreviousButton onClick={() => goToScene(SCENES.menu)}>
                 Go Back
             </PreviousButton>
         </div >

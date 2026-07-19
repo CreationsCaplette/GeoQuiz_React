@@ -1,36 +1,22 @@
-import { createContext, useState } from "react";
+import { createContext, useCallback, useMemo, useState } from "react";
+import { SCENES } from "./scenes.js";
 
 const SceneContext = createContext({
-    scene: 'splash',
-    goToMenu: () => { },
-    goToCapitalsGame: () => { },
-    goToAbout: () => { },
+    scene: SCENES.splash,
+    goToScene: () => { },
 });
 
 export function SceneContextProvider({ children }) {
-    const [scene, setScene] = useState('');
+    const [scene, setScene] = useState(SCENES.splash);
 
-    function goToMenu() {
-        setScene('menu');
-    }
+    const goToScene = useCallback((nextScene) => {
+        setScene(nextScene);
+    }, []);
 
-    function goToCapitalsGame() {
-        setScene('capitalsGame');
-    }
-
-    function goToAbout() {
-        setScene('about');
-    }
-
-    const sceneContext = {
-        scene: scene,
-        goToMenu,
-        goToCapitalsGame,
-        goToAbout,
-    }
+    const value = useMemo(() => ({ scene, goToScene }), [scene, goToScene]);
 
     return (
-        <SceneContext.Provider value={sceneContext}>{children}</SceneContext.Provider>
+        <SceneContext.Provider value={value}>{children}</SceneContext.Provider>
     );
 }
 
