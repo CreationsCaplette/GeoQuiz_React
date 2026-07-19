@@ -1,23 +1,44 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-export default function Timer({ initialTime = 10000, onTimeUp, onTimeChange }) {
+export default function Timer({ initialTime = 10000, onTimeUp, onTimeChange, isPaused = false }) {
     const [timeLeft, setTimeLeft] = useState(initialTime);
+    const intervalRef = useRef(null);
 
     useEffect(() => {
         onTimeChange?.(timeLeft);
     }, [timeLeft, onTimeChange]);
 
     useEffect(() => {
-        if (timeLeft <= 0) {
-            onTimeUp?.();
+        if (isPaused) {
+            if (intervalRef.current) {
+                window.clearInterval(intervalRef.current);
+                intervalRef.current = null;
+            }
             return;
         }
 
-        const intervalId = window.setInterval(() => {
-            setTimeLeft((prev) => prev - 25);
+        if (intervalRef.current || timeLeft <= 0) return;
+
+        intervalRef.current = window.setInterval(() => {
+            setTimeLeft(prev => Math.max(0, prev - 25));
         }, 25);
 
-        return () => window.clearInterval(intervalId);
+        return () => {
+            if (intervalRef.current) {
+                window.clearInterval(intervalRef.current);
+                intervalRef.current = null;
+            }
+        };
+    }, [isPaused, timeLeft]);
+
+    useEffect(() => {
+        if (timeLeft <= 0) {
+            if (intervalRef.current) {
+                window.clearInterval(intervalRef.current);
+                intervalRef.current = null;
+            }
+            onTimeUp?.();
+        }
     }, [timeLeft, onTimeUp]);
 
     const seconds = Math.ceil(timeLeft / 1000);

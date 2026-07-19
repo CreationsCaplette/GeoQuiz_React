@@ -74,6 +74,7 @@ export default function Game() {
                 initialTime={10000}
                 onTimeUp={handleTimeUp}
                 onTimeChange={handleTimeChange}
+                isPaused={hasAnswered}
             />
 
             <Question
