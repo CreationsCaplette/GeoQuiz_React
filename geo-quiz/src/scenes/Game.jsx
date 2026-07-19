@@ -9,6 +9,8 @@ import NextButton from '../components/NextButton.jsx';
 import GameContext from '../store/GameContext.jsx';
 
 export default function Game() {
+    const { goToScene } = useContext(SceneContext);
+
     const {
         questions,
         questionIndex,
@@ -48,12 +50,12 @@ export default function Game() {
         remainingTimeMs.current = timeLeft;
     }
 
+    if (isGameOver) {
+        goToScene(SCENES.gameOver);
+    }
+
     const currentQuestion = questions?.[questionIndex];
     if (!currentQuestion) return null;
-
-    if (isGameOver) {
-        return <p className="center">Game Over!</p>
-    }
 
     return (
         <div className="screen">

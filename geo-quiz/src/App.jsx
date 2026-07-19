@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import Splash from "./scenes/Splash.jsx";
 import Menu from './scenes/Menu.jsx';
 import Game from './scenes/Game.jsx';
+import GameOver from './scenes/GameOver.jsx';
 import About from './scenes/About.jsx';
 
 import { SceneContextProvider } from './store/SceneContext.jsx';
@@ -18,6 +19,8 @@ function SceneContent() {
     sceneState = <Menu />;
   } else if (sceneContext.scene === 'capitalsGame') {
     sceneState = <GameContextProvider><Game /></GameContextProvider>
+  } else if (sceneContext.scene === 'gameOver') {
+    sceneState = <GameContextProvider><GameOver /></GameContextProvider>
   } else if (sceneContext.scene === 'about') {
     sceneState = <About />;
   }
