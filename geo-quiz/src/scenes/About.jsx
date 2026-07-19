@@ -3,6 +3,7 @@ import creationsLogo from '../assets/creations.svg';
 import Button from '../components/Button.jsx';
 
 export default function About() {
+
     return (
         <div className="screen about">
             <h3 className="screen__subtitle">Geo Quiz</h3>
@@ -19,7 +20,9 @@ export default function About() {
             />
             <p className="screen__info">Created by David Caplette</p>
             <p className="screen__info">Designed by Katerina Shuleiko</p>
-            <Button variant="menu">Contact us</Button>
+            <a href="mailto:david.caplette@gmail.com?subject=Geo%20Quiz">
+                <Button variant="menu">Contact us</Button>
+            </a>
         </div>
     );
 }
