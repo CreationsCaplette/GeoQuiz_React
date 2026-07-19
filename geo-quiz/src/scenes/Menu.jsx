@@ -1,9 +1,6 @@
 import { useContext } from 'react';
-
 import menuLogo from '../assets/globe_small.svg';
-
 import SceneContext from '../store/SceneContext.jsx';
-
 import Button from '../components/Button.jsx';
 
 export default function Menu() {

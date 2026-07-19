@@ -27,9 +27,13 @@ body {
   gap: 40px;
   text-align: center;
 }
+.screen.about {
+  gap: 30px;
+}
 
 .screen__title,
-.screen__subtitle {
+.screen__subtitle,
+.screen__info {
   font-weight: 400;
   margin: 0;
 }
@@ -39,7 +43,12 @@ body {
 }
 
 .screen__subtitle {
-  font-size: 1.5625rem;
+  font-size: 1.625rem;
+}
+
+.screen__info {
+  color: #ffffff;
+  font-size: 1.25rem;
 }
 
 .screen__image {
