@@ -18,7 +18,7 @@ export default function Menu() {
 
     const resultByRange = [
         { min: 800, src: faceExcellent, encouragement: "Wow! Excellent!", stars: true },
-        { min: 600, src: faceGood, encouragement: "Very well!", stars: false },
+        { min: 600, src: faceGood, encouragement: "Very well!", stars: true },
         { min: 300, src: faceOkay, encouragement: "Keep on learning!", stars: false },
         { min: 0, src: faceBad, encouragement: "Learn more!", stars: false },
     ];

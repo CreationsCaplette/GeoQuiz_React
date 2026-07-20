@@ -49,11 +49,11 @@ const GameContext = createContext({
     resetGame: () => { },
 });
 
-export function GameContextProvider({ children }) {
+export function GameContextProvider({ children, gameType }) {
     const [gameState, dispatch] = useReducer(gameReducer, initialState);
 
     const { data: questions, isLoading, error } = useHttp(
-        'https://localhost:7266/game/capitals',
+        `https://localhost:7266/game/${gameType}`,
         {},
         []
     );
