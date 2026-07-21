@@ -2,6 +2,13 @@ import React, { useContext } from "react";
 import Button from './Button.jsx';
 import GameContext from '../store/GameContext';
 
+function QuestionDisplay({ questionData, gameType }) {
+    if (gameType === 'flags') {
+        return <img src={questionData.question} alt="Flag" className="game-question-image" />;
+    }
+    return <h2 className="game-question-text">{questionData.question}</h2>;
+}
+
 const Question = React.memo(function Question({
     questionData,
     onChoiceClick: onChoiceClick,
@@ -18,15 +25,7 @@ const Question = React.memo(function Question({
 
     return (
         <div id="question">
-            {gameType === 'flags' ? (
-                <img
-                    src={questionData.question}
-                    alt="Flag"
-                    className="game-question-image"
-                />
-            ) : (
-                <h2 className="game-question-text">{questionData.question}</h2>
-            )}
+            <QuestionDisplay questionData={questionData} gameType={gameType} />
             {questionData.choices.map((choice) => (
                 <Button
                     key={questionData.question + '-' + choice}
