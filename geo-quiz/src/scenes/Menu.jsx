@@ -22,7 +22,9 @@ export default function Menu() {
             <Button variant="menu" onClick={() => goToScene(SCENES.capitalsReverseGame)}>
                 Capitals Reverse
             </Button>
-            <Button variant="menu">Flags</Button>
+            <Button variant="menu" onClick={() => goToScene(SCENES.flagsGame)}>
+                Flags
+            </Button>
             <Button variant="text" onClick={() => goToScene(SCENES.about)}>
                 About
             </Button>
