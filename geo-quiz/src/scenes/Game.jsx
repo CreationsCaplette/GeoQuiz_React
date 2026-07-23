@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import SceneContext from '../store/SceneContext.jsx';
 import { SCENES } from "../store/scenes.js";
 import Progress from '../components/Progress.jsx';
@@ -26,6 +26,12 @@ export default function Game() {
 
     const remainingTimeMs = useRef(10000);
 
+    useEffect(() => {
+        if (isGameOver) {
+            goToScene(SCENES.gameOver);
+        }
+    }, [isGameOver, goToScene]);
+
     if (error) {
         return <Error title="Failed to fetch countries data" message={error} />;
     }
@@ -48,10 +54,6 @@ export default function Game() {
 
     function handleTimeChange(timeLeft) {
         remainingTimeMs.current = timeLeft;
-    }
-
-    if (isGameOver) {
-        goToScene(SCENES.gameOver);
     }
 
     const currentQuestion = questions?.[questionIndex];
