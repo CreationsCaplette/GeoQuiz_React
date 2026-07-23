@@ -2,6 +2,7 @@ import { createContext, useCallback, useMemo, useReducer } from "react";
 import useHttp from "../hooks/useHttp";
 
 const initialState = {
+    gameType: null,
     questionIndex: 0,
     score: 0,
     isGameOver: false,
@@ -36,6 +37,7 @@ function gameReducer(state, action) {
 }
 
 const GameContext = createContext({
+    gameType: null,
     questions: [],
     questionIndex: 0,
     score: 0,
@@ -49,11 +51,11 @@ const GameContext = createContext({
     resetGame: () => { },
 });
 
-export function GameContextProvider({ children }) {
+export function GameContextProvider({ children, gameType }) {
     const [gameState, dispatch] = useReducer(gameReducer, initialState);
 
     const { data: questions, isLoading, error } = useHttp(
-        'https://localhost:7266/game/capitals',
+        gameType ? `https://localhost:7266/game/${gameType}` : null,
         {},
         []
     );
@@ -89,6 +91,7 @@ export function GameContextProvider({ children }) {
 
     const value = useMemo(
         () => ({
+            gameType,
             questions,
             questionIndex: gameState.questionIndex,
             score: gameState.score,
@@ -102,6 +105,7 @@ export function GameContextProvider({ children }) {
             resetGame,
         }),
         [
+            gameType,
             questions,
             gameState.questionIndex,
             gameState.score,
