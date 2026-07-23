@@ -55,7 +55,7 @@ export function GameContextProvider({ children, gameType }) {
     const [gameState, dispatch] = useReducer(gameReducer, initialState);
 
     const { data: questions, isLoading, error } = useHttp(
-        `https://localhost:7266/game/${gameType}`,
+        gameType ? `https://localhost:7266/game/${gameType}` : null,
         {},
         []
     );

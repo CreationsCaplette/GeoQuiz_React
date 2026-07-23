@@ -38,6 +38,8 @@ export default function useHttp(url, config, initialData) {
     );
 
     useEffect(() => {
+        if (!url) return;
+
         const shouldFetch = !config || config.method === "GET" || !config.method;
         const requestKey = `${url}-${config?.method || "GET"}`;
 
