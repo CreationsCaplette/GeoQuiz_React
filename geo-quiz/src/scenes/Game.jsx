@@ -7,6 +7,7 @@ import Timer from '../components/Timer.jsx';
 import Question from '../components/Question.jsx';
 import NextButton from '../components/NextButton.jsx';
 import GameContext from '../store/GameContext.jsx';
+import Error from '../components/Error.jsx';
 
 export default function Game() {
     const { goToScene } = useContext(SceneContext);
@@ -33,7 +34,12 @@ export default function Game() {
     }, [isGameOver, goToScene]);
 
     if (error) {
-        return <Error title="Failed to fetch countries data" message={error} />;
+        const errorMessage = error instanceof Error ? error.message : error;
+        return <Error
+            title="Failed to fetch countries data"
+            message={errorMessage}
+            onAccept={() => goToScene(SCENES.menu)}
+            onAcceptText='Back to menu' />
     }
 
     if (isLoading) {
