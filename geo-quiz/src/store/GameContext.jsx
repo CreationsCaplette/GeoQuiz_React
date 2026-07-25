@@ -54,7 +54,7 @@ const GameContext = createContext({
 export function GameContextProvider({ children, gameType }) {
     const [gameState, dispatch] = useReducer(gameReducer, initialState);
 
-    const { data: questions, isLoading, error } = useHttp(
+    const { data: questions, isLoading, error, sendRequest } = useHttp(
         gameType ? `https://localhost:7266/game/${gameType}` : null,
         {},
         []
@@ -89,6 +89,10 @@ export function GameContextProvider({ children, gameType }) {
         dispatch({ type: "RESET" });
     }, []);
 
+    const refetchQuestions = useCallback(() => {
+        sendRequest();
+    }, [sendRequest]);
+
     const value = useMemo(
         () => ({
             gameType,
@@ -103,6 +107,7 @@ export function GameContextProvider({ children, gameType }) {
             handleAnswer,
             goToNextQuestion,
             resetGame,
+            refetchQuestions,
         }),
         [
             gameType,
@@ -117,6 +122,7 @@ export function GameContextProvider({ children, gameType }) {
             handleAnswer,
             goToNextQuestion,
             resetGame,
+            refetchQuestions,
         ]
     );
 
