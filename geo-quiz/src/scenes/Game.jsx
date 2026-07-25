@@ -23,6 +23,7 @@ export default function Game() {
         hasAnswered,
         handleAnswer,
         goToNextQuestion,
+        refetchQuestions,
     } = useContext(GameContext);
 
     const remainingTimeMs = useRef(10000);
@@ -35,11 +36,14 @@ export default function Game() {
 
     if (error) {
         const errorMessage = error instanceof Error ? error.message : error;
+
         return <Error
             title="Failed to fetch countries data"
             message={errorMessage}
-            onAccept={() => goToScene(SCENES.menu)}
-            onAcceptText='Back to menu' />
+            onAccept={() => refetchQuestions()}
+            onAcceptText='Try again'
+            onDecline={() => goToScene(SCENES.menu)}
+            onDeclineText='Back to menu' />
     }
 
     if (isLoading) {
