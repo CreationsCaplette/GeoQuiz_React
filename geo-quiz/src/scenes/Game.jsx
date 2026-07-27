@@ -1,6 +1,9 @@
 import { useContext, useEffect, useRef } from 'react';
-import SceneContext from '../store/SceneContext.jsx';
+import { useDispatch } from 'react-redux';
+
 import { SCENES } from "../store/scenes.js";
+import { sceneActions } from '../store/scene-slice.jsx';
+
 import Progress from '../components/Progress.jsx';
 import Score from '../components/Score.jsx';
 import Timer from '../components/Timer.jsx';
@@ -10,7 +13,7 @@ import GameContext from '../store/GameContext.jsx';
 import Error from '../components/Error.jsx';
 
 export default function Game() {
-    const { goToScene } = useContext(SceneContext);
+    const dispatch = useDispatch();
 
     const {
         questions,
@@ -30,9 +33,9 @@ export default function Game() {
 
     useEffect(() => {
         if (isGameOver) {
-            goToScene(SCENES.gameOver);
+            dispatch(sceneActions.goToScene(SCENES.gameOver));
         }
-    }, [isGameOver, goToScene]);
+    }, [isGameOver, dispatch]);
 
     if (error) {
         const errorMessage = error instanceof Error ? error.message : error;
@@ -42,7 +45,7 @@ export default function Game() {
             message={errorMessage}
             onAccept={() => refetchQuestions()}
             onAcceptText='Try again'
-            onDecline={() => goToScene(SCENES.menu)}
+            onDecline={() => dispatch(sceneActions.goToScene(SCENES.menu))}
             onDeclineText='Back to menu' />
     }
 

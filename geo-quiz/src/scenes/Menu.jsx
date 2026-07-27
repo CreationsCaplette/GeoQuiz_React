@@ -1,11 +1,13 @@
-import { useContext } from 'react';
-import menuLogo from '../assets/globe_small.svg';
-import SceneContext from '../store/SceneContext.jsx';
+import { useDispatch } from 'react-redux';
+
 import { SCENES } from "../store/scenes.js";
+import { sceneActions } from '../store/scene-slice.jsx';
+
+import menuLogo from '../assets/globe_small.svg';
 import Button from '../components/Button.jsx';
 
 export default function Menu() {
-    const { goToScene } = useContext(SceneContext);
+    const dispatch = useDispatch();
 
     return (
         <div className="screen">
@@ -16,16 +18,16 @@ export default function Menu() {
                 alt="Globe Logo"
             />
 
-            <Button variant="menu" onClick={() => goToScene(SCENES.capitalsGame)}>
+            <Button variant="menu" onClick={() => dispatch(sceneActions.goToScene(SCENES.capitalsGame))}>
                 Capitals
             </Button>
-            <Button variant="menu" onClick={() => goToScene(SCENES.capitalsReverseGame)}>
+            <Button variant="menu" onClick={() => dispatch(sceneActions.goToScene(SCENES.capitalsReverseGame))}>
                 Capitals Reverse
             </Button>
-            <Button variant="menu" onClick={() => goToScene(SCENES.flagsGame)}>
+            <Button variant="menu" onClick={() => dispatch(sceneActions.goToScene(SCENES.flagsGame))}>
                 Flags
             </Button>
-            <Button variant="text" onClick={() => goToScene(SCENES.about)}>
+            <Button variant="text" onClick={() => dispatch(sceneActions.goToScene(SCENES.about))}>
                 About
             </Button>
         </div>

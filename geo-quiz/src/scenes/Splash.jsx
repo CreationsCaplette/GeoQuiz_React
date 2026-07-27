@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import titleLogo from '../assets/globe.svg';
-import creationsLogo from '../assets/creations.svg';
+
 import { SCENES } from '../store/scenes.js';
 import { sceneActions } from '../store/scene-slice.jsx';
+
+import titleLogo from '../assets/globe.svg';
+import creationsLogo from '../assets/creations.svg';
 
 const TIMEOUT = 3000;
 

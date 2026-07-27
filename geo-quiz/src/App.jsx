@@ -1,11 +1,14 @@
+import { useSelector } from 'react-redux';
+
+import { SCENES } from "./store/scenes.js";
+
+import { GameContextProvider } from './store/GameContext';
+
 import Splash from "./scenes/Splash.jsx";
 import Menu from './scenes/Menu.jsx';
 import Game from './scenes/Game.jsx';
 import GameOver from './scenes/GameOver.jsx';
 import About from './scenes/About.jsx';
-import { useSelector } from 'react-redux';
-
-import { SCENES } from "./store/scenes.js";
 
 const sceneComponents = {
   [SCENES.splash]: <Splash />,

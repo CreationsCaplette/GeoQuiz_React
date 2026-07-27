@@ -1,7 +1,11 @@
 import { useContext } from 'react';
-import GameContext from '../store/GameContext.jsx';
-import SceneContext from '../store/SceneContext.jsx';
+import { useDispatch } from 'react-redux';
+
 import { SCENES } from "../store/scenes.js";
+import { sceneActions } from '../store/scene-slice.jsx';
+
+import GameContext from '../store/GameContext.jsx';
+
 import faceBad from '../assets/face_bad.svg';
 import faceOkay from '../assets/face_okay.svg';
 import faceGood from '../assets/face_good.svg';
@@ -10,7 +14,7 @@ import stars from '../assets/stars.svg';
 import PreviousButton from '../components/PreviousButton.jsx';
 
 export default function Menu() {
-    const { goToScene } = useContext(SceneContext);
+    const dispatch = useDispatch();
 
     const {
         score,
@@ -39,7 +43,7 @@ export default function Menu() {
                 className="screen__image screen__image--small"
                 alt="Result face"
             />
-            <PreviousButton onClick={() => goToScene(SCENES.menu)}>
+            <PreviousButton onClick={() => dispatch(sceneActions.goToScene(SCENES.menu))}>
                 Go To The Menu
             </PreviousButton>
         </div>
