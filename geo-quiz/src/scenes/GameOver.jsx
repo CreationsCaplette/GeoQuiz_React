@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { SCENES } from "../store/scenes.js";
 import { sceneActions } from '../store/scene-slice.jsx';
+import { gameActions } from '../store/game-slice.jsx';
 
 import faceBad from '../assets/face_bad.svg';
 import faceOkay from '../assets/face_okay.svg';
@@ -38,9 +39,12 @@ export default function Menu() {
                 className="screen__image screen__image--small"
                 alt="Result face"
             />
-            <PreviousButton onClick={() => dispatch(sceneActions.goToScene(SCENES.menu))}>
+            <PreviousButton onClick={() => {
+                dispatch(gameActions.resetGame());
+                dispatch(sceneActions.goToScene(SCENES.menu));
+            }}>
                 Go To The Menu
             </PreviousButton>
-        </div>
+        </div >
     );
 }

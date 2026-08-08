@@ -16,7 +16,7 @@ const sceneComponents = {
   [SCENES.capitalsGame]: <GameScene gameType="capitals"><Game /></GameScene>,
   [SCENES.capitalsReverseGame]: <GameScene gameType="capitals_reverse"><Game /></GameScene>,
   [SCENES.flagsGame]: <GameScene gameType="flags"><Game /></GameScene>,
-  [SCENES.gameOver]: <GameScene><GameOver /></GameScene>,
+  [SCENES.gameOver]: <GameOver />,
   [SCENES.about]: <About />,
 };
 
