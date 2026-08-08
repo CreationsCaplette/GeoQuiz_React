@@ -1,48 +1,49 @@
-import { useContext, useEffect, useRef } from 'react';
-import SceneContext from '../store/SceneContext.jsx';
+import { useEffect, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { SCENES } from "../store/scenes.js";
+import { sceneActions } from '../store/scene-slice.jsx';
+import { gameActions } from '../store/game-slice.jsx';
+import { fetchGameData } from '../store/game-actions.jsx';
+
 import Progress from '../components/Progress.jsx';
 import Score from '../components/Score.jsx';
 import Timer from '../components/Timer.jsx';
 import Question from '../components/Question.jsx';
 import NextButton from '../components/NextButton.jsx';
-import GameContext from '../store/GameContext.jsx';
 import Error from '../components/Error.jsx';
 
 export default function Game() {
-    const { goToScene } = useContext(SceneContext);
+    const dispatch = useDispatch();
 
     const {
         questions,
-        questionIndex,
         score,
         isLoading,
         isGameOver,
         error,
         selectedChoice,
         hasAnswered,
-        handleAnswer,
-        goToNextQuestion,
-        refetchQuestions,
-    } = useContext(GameContext);
+        questionIndex,
+        gameType,
+    } = useSelector(state => state.game);
 
     const remainingTimeMs = useRef(10000);
 
     useEffect(() => {
         if (isGameOver) {
-            goToScene(SCENES.gameOver);
+            dispatch(sceneActions.goToScene(SCENES.gameOver));
         }
-    }, [isGameOver, goToScene]);
+    }, [isGameOver, dispatch]);
 
     if (error) {
         const errorMessage = error instanceof Error ? error.message : error;
-
         return <Error
             title="Failed to fetch countries data"
             message={errorMessage}
-            onAccept={() => refetchQuestions()}
+            onAccept={() => dispatch(fetchGameData(gameType))}
             onAcceptText='Try again'
-            onDecline={() => goToScene(SCENES.menu)}
+            onDecline={() => dispatch(sceneActions.goToScene(SCENES.menu))}
             onDeclineText='Back to menu' />
     }
 
@@ -51,15 +52,21 @@ export default function Game() {
     }
 
     function onNextQuestion() {
-        goToNextQuestion();
+        dispatch(gameActions.goToNextQuestion());
     }
 
     function onAnswer(choice) {
-        handleAnswer(choice, remainingTimeMs.current);
+        dispatch(gameActions.handleAnswer({
+            selectedChoice: choice,
+            remainingTimeMs: remainingTimeMs.current,
+        }));
     }
 
     function handleTimeUp() {
-        handleAnswer();
+        dispatch(gameActions.handleAnswer({
+            choice: null,
+            remainingTimeMs: 0,
+        }));
     }
 
     function handleTimeChange(timeLeft) {
@@ -93,6 +100,7 @@ export default function Game() {
 
             <Question
                 questionData={currentQuestion}
+                gameType={gameType}
                 onChoiceClick={onAnswer}
                 isAnswered={hasAnswered}
                 selectedChoice={selectedChoice}

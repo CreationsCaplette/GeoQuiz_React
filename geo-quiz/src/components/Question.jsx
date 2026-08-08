@@ -1,6 +1,5 @@
-import React, { useContext } from "react";
+import React from "react";
 import Button from './Button.jsx';
-import GameContext from '../store/GameContext';
 
 function QuestionDisplay({ questionData, gameType }) {
     if (gameType === 'flags') {
@@ -11,12 +10,11 @@ function QuestionDisplay({ questionData, gameType }) {
 
 const Question = React.memo(function Question({
     questionData,
+    gameType,
     onChoiceClick: onChoiceClick,
     isAnswered,
     selectedChoice,
 }) {
-    const { gameType } = useContext(GameContext);
-
     const getChoiceClass = (choice) => {
         if (!isAnswered || (choice !== selectedChoice && choice !== questionData.answer))
             return "";

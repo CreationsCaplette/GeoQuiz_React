@@ -1,13 +1,14 @@
-import { useContext } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+
+import { SCENES } from "./store/scenes.js";
+import { fetchGameData } from './store/game-actions.jsx';
+
 import Splash from "./scenes/Splash.jsx";
 import Menu from './scenes/Menu.jsx';
 import Game from './scenes/Game.jsx';
 import GameOver from './scenes/GameOver.jsx';
 import About from './scenes/About.jsx';
-import { SceneContextProvider } from './store/SceneContext.jsx';
-import SceneContext from './store/SceneContext';
-import { SCENES } from "./store/scenes.js";
-import { GameContextProvider } from './store/GameContext';
 
 const sceneComponents = {
   [SCENES.splash]: <Splash />,
@@ -15,24 +16,28 @@ const sceneComponents = {
   [SCENES.capitalsGame]: <GameScene gameType="capitals"><Game /></GameScene>,
   [SCENES.capitalsReverseGame]: <GameScene gameType="capitals_reverse"><Game /></GameScene>,
   [SCENES.flagsGame]: <GameScene gameType="flags"><Game /></GameScene>,
-  [SCENES.gameOver]: <GameScene><GameOver /></GameScene>,
+  [SCENES.gameOver]: <GameOver />,
   [SCENES.about]: <About />,
 };
 
 function GameScene({ gameType, children }) {
-  return <GameContextProvider gameType={gameType}>{children}</GameContextProvider>;
-}
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (gameType) {
+      dispatch(fetchGameData(gameType));
+    }
+  }, [dispatch, gameType]);
 
-function SceneContent() {
-  const { scene } = useContext(SceneContext);
-  return sceneComponents[scene] || <Splash />;
+  return <>{children}</>;
 }
 
 function App() {
+  const scene = useSelector(state => state.scene.currentScene);
+
   return (
-    <SceneContextProvider>
-      <SceneContent />
-    </SceneContextProvider>
+    <>
+      {sceneComponents[scene] || <Splash />}
+    </>
   );
 }
 

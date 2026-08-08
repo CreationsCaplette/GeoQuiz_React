@@ -1,19 +1,22 @@
-import { useEffect, useContext } from 'react';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { SCENES } from '../store/scenes.js';
+import { sceneActions } from '../store/scene-slice.jsx';
+
 import titleLogo from '../assets/globe.svg';
 import creationsLogo from '../assets/creations.svg';
-import SceneContext from '../store/SceneContext';
-import { SCENES } from "../store/scenes.js";
 
 const TIMEOUT = 3000;
 
 export default function Splash() {
-    const { goToScene } = useContext(SceneContext)
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        const timer = setTimeout(() => goToScene(SCENES.menu), TIMEOUT);
+        const timer = setTimeout(() => dispatch(sceneActions.goToScene(SCENES.menu)), TIMEOUT);
 
         return () => { clearTimeout(timer) };
-    }, [goToScene]);
+    }, [dispatch]);
 
 
     return (
