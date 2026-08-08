@@ -57,7 +57,7 @@ export default function Game() {
 
     function onAnswer(choice) {
         dispatch(gameActions.handleAnswer({
-            choice: choice,
+            selectedChoice: choice,
             remainingTimeMs: remainingTimeMs.current,
         }));
     }
