@@ -1,8 +1,8 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 import { SCENES } from "./store/scenes.js";
-
-import { GameContextProvider } from './store/GameContext';
+import { fetchGameData } from './store/game-actions.jsx';
 
 import Splash from "./scenes/Splash.jsx";
 import Menu from './scenes/Menu.jsx';
@@ -21,7 +21,14 @@ const sceneComponents = {
 };
 
 function GameScene({ gameType, children }) {
-  return <GameContextProvider gameType={gameType}>{children}</GameContextProvider>;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (gameType) {
+      dispatch(fetchGameData(gameType));
+    }
+  }, [dispatch, gameType]);
+
+  return <>{children}</>;
 }
 
 function App() {

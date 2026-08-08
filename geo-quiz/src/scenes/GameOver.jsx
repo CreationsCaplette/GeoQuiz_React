@@ -1,10 +1,7 @@
-import { useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { SCENES } from "../store/scenes.js";
 import { sceneActions } from '../store/scene-slice.jsx';
-
-import GameContext from '../store/GameContext.jsx';
 
 import faceBad from '../assets/face_bad.svg';
 import faceOkay from '../assets/face_okay.svg';
@@ -16,9 +13,7 @@ import PreviousButton from '../components/PreviousButton.jsx';
 export default function Menu() {
     const dispatch = useDispatch();
 
-    const {
-        score,
-    } = useContext(GameContext);
+    const score = useSelector(state => state.game.score);
 
     const resultByRange = [
         { min: 800, src: faceExcellent, encouragement: "Wow! Excellent!", stars: true },
