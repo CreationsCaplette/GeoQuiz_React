@@ -1,18 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+    gameType: null,
+    isLoading: false,
+    isGameOver: false,
+    hasAnswered: false,
+    error: null,
+    questions: [],
+    questionIndex: 0,
+    score: 0,
+    selectedChoice: null,
+};
+
 const gameSlice = createSlice({
     name: 'game',
-    initialState: {
-        gameType: null,
-        isLoading: false,
-        isGameOver: false,
-        hasAnswered: false,
-        error: null,
-        questions: [],
-        questionIndex: 0,
-        score: 0,
-        selectedChoice: null,
-    },
+    initialState,
     reducers: {
         setGameType(state, action) {
             state.gameType = action.payload;
@@ -47,16 +49,8 @@ const gameSlice = createSlice({
             state.hasAnswered = false;
             state.selectedChoice = null;
         },
-        resetGame(state) {
-            state.gameType = null;
-            state.isLoading = false;
-            state.isGameOver = false;
-            state.hasAnswered = false;
-            state.error = null;
-            state.questions = [];
-            state.questionIndex = 0;
-            state.score = 0;
-            state.selectedChoice = null;
+        resetGame() {
+            return initialState;
         }
     }
 });
