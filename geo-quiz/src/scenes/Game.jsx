@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useLoaderData } from 'react-router-dom';
 
 import { SCENES } from "../store/scenes.js";
 import { sceneActions } from '../store/scene-slice.jsx';
@@ -15,6 +16,14 @@ import Error from '../components/Error.jsx';
 
 export default function Game() {
     const dispatch = useDispatch();
+
+    const data = useLoaderData();
+
+    useEffect(() => {
+        dispatch(gameActions.resetGame());
+        dispatch(gameActions.setQuestions(data));
+    }, [dispatch, data]);
+
 
     const {
         questions,
@@ -113,4 +122,27 @@ export default function Game() {
             </NextButton>
         </div>
     );
+}
+
+export async function loader({ params }) {
+    const gameType = params.gameType;
+    if (!gameType) {
+        throw new Response(JSON.stringify({ message: 'Invalid game type.' }), {
+            status: 500,
+        });
+    }
+
+    const res = await fetch(`https://localhost:7266/game/${gameType}`);
+
+    let data;
+    try {
+        data = await res.json();
+    } catch {
+        data = null;
+    }
+    if (!res.ok) {
+        const msg = data && data.message ? data.message : `Request failed with status ${res.status}`;
+        throw new Error(msg);
+    }
+    return data;
 }
