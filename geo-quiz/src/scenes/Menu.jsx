@@ -1,16 +1,9 @@
 import { Link } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
-
-import { SCENES } from "../store/scenes.js";
-import { sceneActions } from '../store/scene-slice.jsx';
-
 import menuLogo from '../assets/globe_small.svg';
 import Button from '../components/Button.jsx';
 
 export default function Menu() {
-    const dispatch = useDispatch();
-
     return (
         <div className="screen">
             <h3 className="screen__subtitle">Geo Quiz</h3>
@@ -20,18 +13,10 @@ export default function Menu() {
                 alt="Globe Logo"
             />
 
-            <Button variant="menu" onClick={() => dispatch(sceneActions.goToScene(SCENES.capitalsGame))}>
-                Capitals
-            </Button>
-            <Button variant="menu" onClick={() => dispatch(sceneActions.goToScene(SCENES.capitalsReverseGame))}>
-                Capitals Reverse
-            </Button>
-            <Button variant="menu" onClick={() => dispatch(sceneActions.goToScene(SCENES.flagsGame))}>
-                Flags
-            </Button>
-            <Link className="button text" to="/about">
-                About
-            </Link>
+            <Link className="button menu" to="/capitals">Capitals</Link>
+            <Link className="button menu" to="/capitals_reverse">Capitals Reverse</Link>
+            <Link className="button menu" to="/flags">Flags</Link>
+            <Link className="button text" to="/about">About</Link>
         </div>
     );
 }
