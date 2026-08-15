@@ -1,11 +1,11 @@
 import { Route, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import Splash from "./scenes/Splash.jsx";
-import Menu from './scenes/Menu.jsx';
-import Game from './scenes/Game.jsx';
+import Splash from "./pages/Splash.jsx";
+import Menu from './pages/Menu.jsx';
+import Game from './pages/Game.jsx';
 import { gameLoader } from './loaders/GameLoader.js';
-import GameOver from './scenes/GameOver.jsx';
-import About from './scenes/About.jsx';
+import GameOver from './pages/GameOver.jsx';
+import About from './pages/About.jsx';
 
 const router = createBrowserRouter([
   { path: '/', element: <Splash /> },

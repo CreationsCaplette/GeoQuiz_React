@@ -7,7 +7,7 @@ import faceExcellent from '../assets/face_excellent.svg';
 import stars from '../assets/stars.svg';
 import BackButton from '../components/BackButton.jsx';
 
-export default function Menu() {
+export default function GameOver() {
     const score = useSelector(state => state.game.score);
 
     const resultByRange = [
