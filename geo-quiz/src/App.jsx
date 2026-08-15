@@ -1,3 +1,4 @@
+import { Route, RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -9,6 +10,14 @@ import Menu from './scenes/Menu.jsx';
 import Game from './scenes/Game.jsx';
 import GameOver from './scenes/GameOver.jsx';
 import About from './scenes/About.jsx';
+
+const router = createBrowserRouter([
+  { path: '/', element: <Splash /> },
+  { path: '/menu', element: <Menu /> },
+  { path: '/about', element: <About /> },
+  { path: '/:gameType', element: <Game /> },
+  { path: '/gameOver', element: <GameOver /> },
+]);
 
 const sceneComponents = {
   [SCENES.splash]: <Splash />,
@@ -32,13 +41,15 @@ function GameScene({ gameType, children }) {
 }
 
 function App() {
-  const scene = useSelector(state => state.scene.currentScene);
+  return <RouterProvider router={router} />;
+
+  /*const scene = useSelector(state => state.scene.currentScene);
 
   return (
     <>
       {sceneComponents[scene] || <Splash />}
     </>
-  );
+  );*/
 }
 
 export default App;
