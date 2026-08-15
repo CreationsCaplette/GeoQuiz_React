@@ -24,6 +24,7 @@ export default function Game(data) {
         questions,
         score,
         isLoading,
+        isLastQuestion,
         isGameOver,
         selectedChoice,
         hasAnswered,
@@ -79,7 +80,7 @@ export default function Game(data) {
                 onClick={() => dispatch(gameActions.goToNextQuestion())}
                 isVisible={hasAnswered}
             >
-                Next Question
+                {isLastQuestion ? 'See your results' : 'Next Question'}
             </NextButton>
         </div>
     );

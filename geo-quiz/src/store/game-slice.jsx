@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     gameType: null,
     isLoading: false,
+    isLastQuestion: false,
     isGameOver: false,
     hasAnswered: false,
     error: null,
@@ -21,6 +22,7 @@ const gameSlice = createSlice({
 
             state.gameType = gameType;
             state.isLoading = false;
+            state.isLastQuestion = false;
             state.isGameOver = false;
             state.hasAnswered = false;
             state.error = null;
@@ -50,6 +52,7 @@ const gameSlice = createSlice({
         goToNextQuestion(state) {
             const next = state.questionIndex + 1;
             state.questionIndex = next;
+            state.isLastQuestion = next == state.questions?.length - 1;
             state.isGameOver = next >= (state.questions?.length || 0);
             state.hasAnswered = false;
             state.selectedChoice = null;
