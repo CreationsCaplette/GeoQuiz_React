@@ -183,6 +183,7 @@ body {
   padding: 10px;
   text-align: center;
   display: inline-block;
+  font-family: "Kadwa";
   font-size: 16px;
   height: 52px;
   width: 260px;
@@ -226,6 +227,7 @@ body {
   width: auto;
   height: auto;
   font-size: inherit;
+  text-decoration: none;
 }
 
 .button.text:hover {
@@ -244,6 +246,12 @@ body {
   padding: 12px;
   color: #ffffff;
   cursor: pointer;
+  text-decoration: none;
+}
+
+.next-button:hover,
+.previous-button:hover {
+  text-decoration: underline;
 }
 
 .next-button.hidden {

@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { useDispatch } from 'react-redux';
 
 import { SCENES } from "../store/scenes.js";
@@ -27,9 +29,9 @@ export default function Menu() {
             <Button variant="menu" onClick={() => dispatch(sceneActions.goToScene(SCENES.flagsGame))}>
                 Flags
             </Button>
-            <Button variant="text" onClick={() => dispatch(sceneActions.goToScene(SCENES.about))}>
+            <Link className="button text" to="/about">
                 About
-            </Button>
+            </Link>
         </div>
     );
 }

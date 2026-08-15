@@ -1,7 +1,4 @@
-import { useDispatch } from 'react-redux';
-
-import { SCENES } from "../store/scenes.js";
-import { sceneActions } from '../store/scene-slice.jsx';
+import { Link } from 'react-router-dom';
 
 import menuLogo from '../assets/globe_small.svg';
 import creationsLogo from '../assets/creations.svg';
@@ -10,7 +7,6 @@ import PreviousButton from '../components/PreviousButton.jsx';
 
 
 export default function About() {
-    const dispatch = useDispatch();
 
     return (
         <div className="screen about">
@@ -31,9 +27,7 @@ export default function About() {
             <a href="mailto:david.caplette@gmail.com?subject=Geo%20Quiz">
                 <Button variant="menu">Contact us</Button>
             </a>
-            <PreviousButton onClick={() => dispatch(sceneActions.goToScene(SCENES.menu))}>
-                Go Back
-            </PreviousButton>
+            <PreviousButton toLink="/menu">Go Back</PreviousButton>
         </div >
     );
 }
