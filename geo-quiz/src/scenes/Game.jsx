@@ -16,17 +16,15 @@ import Error from '../components/Error.jsx';
 
 export default function Game() {
     const dispatch = useDispatch();
-
-    const data = useLoaderData();
-
+    const { gameType, questions } = useLoaderData();
     useEffect(() => {
         dispatch(gameActions.resetGame());
-        dispatch(gameActions.setQuestions(data));
-    }, [dispatch, data]);
+        dispatch(gameActions.setGameType(gameType));
+        dispatch(gameActions.setQuestions(questions));
+    }, [dispatch, gameType, questions]);
 
 
     const {
-        questions,
         score,
         isLoading,
         isGameOver,
@@ -34,7 +32,6 @@ export default function Game() {
         selectedChoice,
         hasAnswered,
         questionIndex,
-        gameType,
     } = useSelector(state => state.game);
 
     const remainingTimeMs = useRef(10000);

@@ -19,5 +19,8 @@ export async function gameLoader({ params }) {
         const msg = data && data.message ? data.message : `Request failed with status ${res.status}`;
         throw new Error(msg);
     }
-    return data;
+    return {
+        gameType: gameType,
+        questions: data,
+    };
 }
