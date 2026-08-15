@@ -1,19 +1,15 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { SCENES } from "../store/scenes.js";
-import { sceneActions } from '../store/scene-slice.jsx';
-import { gameActions } from '../store/game-slice.jsx';
 
 import faceBad from '../assets/face_bad.svg';
 import faceOkay from '../assets/face_okay.svg';
 import faceGood from '../assets/face_good.svg';
 import faceExcellent from '../assets/face_excellent.svg';
 import stars from '../assets/stars.svg';
-import PreviousButton from '../components/PreviousButton.jsx';
+import BackButton from '../components/BackButton.jsx';
 
 export default function Menu() {
-    const dispatch = useDispatch();
-
     const score = useSelector(state => state.game.score);
 
     const resultByRange = [
@@ -39,12 +35,7 @@ export default function Menu() {
                 className="screen__image screen__image--small"
                 alt="Result face"
             />
-            <PreviousButton onClick={() => {
-                dispatch(gameActions.resetGame());
-                dispatch(sceneActions.goToScene(SCENES.menu));
-            }}>
-                Go To The Menu
-            </PreviousButton>
+            <BackButton toLink="/menu">Go To The Menu</BackButton>
         </div >
     );
 }

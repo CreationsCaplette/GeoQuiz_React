@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import menuLogo from '../assets/globe_small.svg';
 import creationsLogo from '../assets/creations.svg';
 import Button from '../components/Button.jsx';
-import PreviousButton from '../components/PreviousButton.jsx';
+import BackButton from '../components/BackButton.jsx';
 
 
 export default function About() {
@@ -27,7 +27,7 @@ export default function About() {
             <a href="mailto:david.caplette@gmail.com?subject=Geo%20Quiz">
                 <Button variant="menu">Contact us</Button>
             </a>
-            <PreviousButton toLink="/menu">Go Back</PreviousButton>
+            <BackButton toLink="/menu">Go Back</BackButton>
         </div >
     );
 }

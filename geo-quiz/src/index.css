@@ -236,7 +236,7 @@ body {
 }
 
 .next-button,
-.previous-button {
+.back-button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -250,7 +250,7 @@ body {
 }
 
 .next-button:hover,
-.previous-button:hover {
+.back-button:hover {
   text-decoration: underline;
 }
 
