@@ -54,6 +54,9 @@ const gameSlice = createSlice({
             state.hasAnswered = false;
             state.selectedChoice = null;
         },
+        resetGame() {
+            return initialState;
+        }
     }
 });
 

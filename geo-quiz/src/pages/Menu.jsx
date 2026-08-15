@@ -1,9 +1,19 @@
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { gameActions } from '../store/game-slice.jsx';
 
 import menuLogo from '../assets/globe_small.svg';
 import Button from '../components/Button.jsx';
 
 export default function Menu() {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(gameActions.resetGame());
+    }, [dispatch]);
+
     return (
         <div className="screen">
             <h3 className="screen__subtitle">Geo Quiz</h3>
