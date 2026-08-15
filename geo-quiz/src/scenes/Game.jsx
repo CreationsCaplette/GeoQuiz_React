@@ -5,7 +5,6 @@ import { useLoaderData } from 'react-router-dom';
 import { SCENES } from "../store/scenes.js";
 import { sceneActions } from '../store/scene-slice.jsx';
 import { gameActions } from '../store/game-slice.jsx';
-import { fetchGameData } from '../store/game-actions.jsx';
 
 import Progress from '../components/Progress.jsx';
 import Score from '../components/Score.jsx';
@@ -16,22 +15,21 @@ import Error from '../components/Error.jsx';
 
 export default function Game() {
     const dispatch = useDispatch();
-    const { gameType, questions } = useLoaderData();
+    const gameData = useLoaderData();
     useEffect(() => {
-        dispatch(gameActions.resetGame());
-        dispatch(gameActions.setGameType(gameType));
-        dispatch(gameActions.setQuestions(questions));
-    }, [dispatch, gameType, questions]);
+        dispatch(gameActions.startGame(gameData));
+    }, [dispatch, gameData]);
 
 
     const {
+        questions,
         score,
         isLoading,
         isGameOver,
-        error,
         selectedChoice,
         hasAnswered,
         questionIndex,
+        gameType,
     } = useSelector(state => state.game);
 
     const remainingTimeMs = useRef(10000);
@@ -41,17 +39,6 @@ export default function Game() {
             dispatch(sceneActions.goToScene(SCENES.gameOver));
         }
     }, [isGameOver, dispatch]);
-
-    if (error) {
-        const errorMessage = error instanceof Error ? error.message : error;
-        return <Error
-            title="Failed to fetch countries data"
-            message={errorMessage}
-            onAccept={() => dispatch(fetchGameData(gameType))}
-            onAcceptText='Try again'
-            onDecline={() => dispatch(sceneActions.goToScene(SCENES.menu))}
-            onDeclineText='Back to menu' />
-    }
 
     if (isLoading) {
         return <p className="center">Fetching countries data...</p>

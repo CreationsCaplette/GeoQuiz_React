@@ -16,16 +16,21 @@ const gameSlice = createSlice({
     name: 'game',
     initialState,
     reducers: {
-        setGameType(state, action) {
-            state.gameType = action.payload;
+        startGame(state, action) {
+            const { gameType, questions } = action.payload;
+
+            state.gameType = gameType;
+            state.isLoading = false;
+            state.isGameOver = false;
+            state.hasAnswered = false;
+            state.error = null;
+            state.questions = questions;
+            state.questionIndex = 0;
+            state.score = 0;
+            state.selectedChoice = null;
         },
         setLoading(state, action) {
             state.isLoading = action.payload;
-        },
-        setQuestions(state, action) {
-            state.questions = action.payload || [];
-            state.questionIndex = 0;
-            state.isGameOver = false;
         },
         setError(state, action) {
             state.error = action.payload;
@@ -49,9 +54,6 @@ const gameSlice = createSlice({
             state.hasAnswered = false;
             state.selectedChoice = null;
         },
-        resetGame() {
-            return initialState;
-        }
     }
 });
 
