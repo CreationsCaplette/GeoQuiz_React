@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 
 import { SCENES } from "../store/scenes.js";
 import { sceneActions } from '../store/scene-slice.jsx';
@@ -16,6 +16,8 @@ import Error from '../components/Error.jsx';
 export default function Game() {
     const dispatch = useDispatch();
     const gameData = useLoaderData();
+    const navigate = useNavigate();
+
     useEffect(() => {
         dispatch(gameActions.startGame(gameData));
     }, [dispatch, gameData]);
@@ -36,9 +38,9 @@ export default function Game() {
 
     useEffect(() => {
         if (isGameOver) {
-            dispatch(sceneActions.goToScene(SCENES.gameOver));
+            navigate('/gameOver')
         }
-    }, [isGameOver, dispatch]);
+    }, [isGameOver, navigate]);
 
     if (isLoading) {
         return <p className="center">Fetching countries data...</p>

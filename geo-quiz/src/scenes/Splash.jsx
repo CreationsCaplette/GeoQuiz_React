@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import titleLogo from '../assets/globe.svg';
 import creationsLogo from '../assets/creations.svg';
-import { useNavigate } from 'react-router-dom';
 
 const TIMEOUT = 3000;
 
