@@ -1,22 +1,20 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-
-import { SCENES } from '../store/scenes.js';
-import { sceneActions } from '../store/scene-slice.jsx';
 
 import titleLogo from '../assets/globe.svg';
 import creationsLogo from '../assets/creations.svg';
+import { useNavigate } from 'react-router-dom';
 
 const TIMEOUT = 3000;
 
 export default function Splash() {
-    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const timer = setTimeout(() => dispatch(sceneActions.goToScene(SCENES.menu)), TIMEOUT);
+        const timer = setTimeout(() =>
+            navigate('/menu'), TIMEOUT);
 
         return () => { clearTimeout(timer) };
-    }, [dispatch]);
+    }, [navigate]);
 
 
     return (
