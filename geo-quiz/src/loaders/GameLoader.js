@@ -1,26 +1,23 @@
-export async function gameLoader({ params }) {
-    const gameType = params.gameType;
+async function loadGame(gameType) {
+    const response = await fetch(`https://localhost:7266/game/${gameType}`);
 
-    if (!gameType) {
-        throw new Response(JSON.stringify({ message: 'Invalid game type.' }), {
+    if (!response.ok) {
+        return new Response(JSON.stringify({ message: 'Could not fetch game.' }), {
             status: 500,
         });
     }
 
-    const res = await fetch(`https://localhost:7266/game/${gameType}`);
-
-    let data;
-    try {
-        data = await res.json();
-    } catch {
-        data = null;
-    }
-    if (!res.ok) {
-        const msg = data && data.message ? data.message : `Request failed with status ${res.status}`;
-        throw new Error(msg);
-    }
+    const resData = await response.json();
     return {
         gameType: gameType,
-        questions: data,
+        questions: resData,
+    };
+}
+
+export async function gameLoader({ params }) {
+    const gameType = params.gameType;
+
+    return {
+        gameData: loadGame(gameType),
     };
 }
