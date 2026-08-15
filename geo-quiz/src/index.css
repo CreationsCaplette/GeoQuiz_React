@@ -94,16 +94,24 @@ body {
 
 .game-header {
   width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+}
+
+.game-status {
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
 }
 
-.game-header__score {
+.game-status__score {
   justify-self: start;
 }
 
-.game-header__progress {
+.game-status__progress {
   justify-self: end;
 }
 
@@ -252,7 +260,6 @@ body {
   gap: 12px;
   background: transparent;
   border: none;
-  padding: 12px;
   color: #ffffff;
   cursor: pointer;
   text-decoration: none;

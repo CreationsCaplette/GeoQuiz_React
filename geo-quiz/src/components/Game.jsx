@@ -8,6 +8,7 @@ import Progress from '../components/Progress.jsx';
 import Score from '../components/Score.jsx';
 import Timer from '../components/Timer.jsx';
 import Question from '../components/Question.jsx';
+import BackButton from '../components/BackButton.jsx';
 import NextButton from '../components/NextButton.jsx';
 import Error from '../components/Error.jsx';
 
@@ -18,7 +19,6 @@ export default function Game(data) {
     useEffect(() => {
         dispatch(gameActions.startGame(data.gameData));
     }, [dispatch, data]);
-
 
     const {
         questions,
@@ -50,10 +50,14 @@ export default function Game(data) {
     return (
         <div className="screen">
             <div className="game-header">
-                <div className="game-header__score">
+                <BackButton toLink="/menu" preventable={true}>Go Back</BackButton>
+            </div>
+
+            <div className="game-status">
+                <div className="game-status__score">
                     <Score score={score} />
                 </div>
-                <div className="game-header__progress">
+                <div className="game-status__progress">
                     <Progress
                         progressIndex={questionIndex + 1}
                         questionCount={questions.length}
