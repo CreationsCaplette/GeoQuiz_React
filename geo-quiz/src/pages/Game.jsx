@@ -44,28 +44,6 @@ export default function Game() {
         return <p className="center">Fetching countries data...</p>
     }
 
-    function onNextQuestion() {
-        dispatch(gameActions.goToNextQuestion());
-    }
-
-    function onAnswer(choice) {
-        dispatch(gameActions.handleAnswer({
-            selectedChoice: choice,
-            remainingTimeMs: remainingTimeMs.current,
-        }));
-    }
-
-    function handleTimeUp() {
-        dispatch(gameActions.handleAnswer({
-            choice: null,
-            remainingTimeMs: 0,
-        }));
-    }
-
-    function handleTimeChange(timeLeft) {
-        remainingTimeMs.current = timeLeft;
-    }
-
     const currentQuestion = questions?.[questionIndex];
     if (!currentQuestion) return null;
 
@@ -86,20 +64,20 @@ export default function Game() {
             <Timer
                 key={questionIndex}
                 initialTime={10000}
-                onTimeUp={handleTimeUp}
-                onTimeChange={handleTimeChange}
+                onTimeUp={() => dispatch(gameActions.handleAnswer({ choice: null, remainingTimeMs: 0 }))}
+                onTimeChange={(timeLeft) => remainingTimeMs.current = timeLeft}
                 isPaused={hasAnswered}
             />
 
             <Question
                 questionData={currentQuestion}
                 gameType={gameType}
-                onChoiceClick={onAnswer}
+                onChoiceClick={(choice) => dispatch(gameActions.handleAnswer({ selectedChoice: choice, remainingTimeMs: remainingTimeMs.current }))}
                 isAnswered={hasAnswered}
                 selectedChoice={selectedChoice}
             />
             <NextButton
-                onClick={onNextQuestion}
+                onClick={() => dispatch(gameActions.goToNextQuestion())}
                 isVisible={hasAnswered}
             >
                 Next Question
