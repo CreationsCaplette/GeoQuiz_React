@@ -2,8 +2,6 @@ import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useLoaderData, useNavigate } from 'react-router-dom';
 
-import { SCENES } from "../store/scenes.js";
-import { sceneActions } from '../store/scene-slice.jsx';
 import { gameActions } from '../store/game-slice.jsx';
 
 import Progress from '../components/Progress.jsx';

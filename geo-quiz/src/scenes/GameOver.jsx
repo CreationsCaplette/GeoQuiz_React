@@ -1,7 +1,5 @@
 import { useSelector } from 'react-redux';
 
-import { SCENES } from "../store/scenes.js";
-
 import faceBad from '../assets/face_bad.svg';
 import faceOkay from '../assets/face_okay.svg';
 import faceGood from '../assets/face_good.svg';
