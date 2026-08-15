@@ -2,7 +2,8 @@ import { Route, RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import Splash from "./scenes/Splash.jsx";
 import Menu from './scenes/Menu.jsx';
-import Game, { loader as gameLoader } from './scenes/Game.jsx';
+import Game from './scenes/Game.jsx';
+import { gameLoader } from './loaders/GameLoader.js';
 import GameOver from './scenes/GameOver.jsx';
 import About from './scenes/About.jsx';
 
